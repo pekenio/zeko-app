@@ -1,0 +1,329 @@
+body {
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: #6200EE;
+  position: relative;
+}
+
+main {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+}
+
+main .discute_image {
+  height: auto;
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+}
+
+main .discute_image .discute_image--img {
+  width: 90%;
+  height: auto;
+}
+
+main .formSection {
+  height: 60px;
+  width: 100%;
+  padding: 0;
+  position: absolute;
+  margin: auto;
+  bottom: 0;
+  top: 100px;
+  right: 0;
+  left: 0;
+}
+
+main .formSection .formSection_separateBar {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: auto;
+}
+
+main .formSection .formSection_separateBar--first, main .formSection .formSection_separateBar--second {
+  width: 45%;
+  height: 2px;
+  background-color: white;
+}
+
+main .formSection .formSection_connexionButton {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: white;
+}
+
+main .formSection .formSection_insciptionButton {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #3D39BC;
+  color: white;
+}
+
+.userChoicesConnexion {
+  position: absolute;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
+  bottom: -100vh;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  padding: 0;
+  background-color: white;
+  height: 350px;
+}
+
+.userChoicesConnexion .userChoicesConnexion_form {
+  width: 80%;
+  padding: 0;
+  margin: 30px auto;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.userChoicesConnexion .userChoicesConnexion_form input {
+  display: block;
+  width: 100%;
+  margin: 20px auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid silver;
+}
+
+.userChoicesConnexion .userChoicesConnexion_form input:focus {
+  outline: none;
+}
+
+.userChoicesConnexion .userChoicesConnexion_form a {
+  float: right;
+}
+
+.userChoicesConnexion .userChoicesConnexion_form button {
+  background-color: #6200EE;
+  border: none;
+  color: white;
+  display: block;
+  width: 100%;
+  margin-top: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.userChoicesConnexion.open {
+  bottom: 0;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
+}
+
+.userChoicesConnexion.open .userChoicesConnexion_close {
+  width: 20%;
+  height: 4px;
+  margin: 15px auto;
+  cursor: pointer;
+  background-color: silver;
+}
+
+.userChoicesInscription {
+  position: absolute;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
+  bottom: -100vh;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  padding: 0;
+  background-color: white;
+  height: 400px;
+}
+
+.userChoicesInscription .steps {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: -1;
+  width: 80%;
+  margin: 30px auto;
+  height: 2px;
+  background-color: #6200EE;
+}
+
+.userChoicesInscription .steps .number {
+  height: 30px;
+  width: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #6200EE;
+}
+
+.userChoicesInscription .steps .number.selected {
+  background-color: #6200EE;
+  color: white;
+}
+
+.userChoicesInscription .userChoicesInscription_form {
+  width: 80%;
+  padding: 0;
+  margin: 30px auto;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: hidden;
+}
+
+.userChoicesInscription .userChoicesInscription_form .stepControl {
+  width: 300%;
+  display: -ms-grid;
+  display: grid;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  grid-template-columns: repeat(3, 1fr);
+  -ms-grid-columns: repeat(3, 1fr);
+}
+
+.userChoicesInscription .userChoicesInscription_form .stepControl .section {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.userChoicesInscription .userChoicesInscription_form .stepControl .section input, .userChoicesInscription .userChoicesInscription_form .stepControl .section select {
+  display: block;
+  width: 100%;
+  margin: 20px auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid silver;
+}
+
+.userChoicesInscription .userChoicesInscription_form .stepControl .section input:focus, .userChoicesInscription .userChoicesInscription_form .stepControl .section select:focus {
+  outline: none;
+}
+
+.userChoicesInscription .userChoicesInscription_form .stepControl .section .next {
+  margin-top: 10px;
+  float: right;
+  height: 20px;
+  width: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 50%;
+  background-color: #6200EE;
+  color: white;
+}
+
+.userChoicesInscription .userChoicesInscription_form .stepControl .section .valider {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  background-color: #3D39BC;
+  color: white;
+}
+
+.userChoicesInscription .userChoicesInscription_form .stepControl .section .confidential {
+  overflow-y: scroll;
+  height: 150px;
+}
+
+.userChoicesInscription .userChoicesInscription_form .stepControl .section .accord {
+  margin-top: 10px;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #3D39BC;
+  font-size: small;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.userChoicesInscription .userChoicesInscription_form .stepControl .section .accord input {
+  display: inline;
+  float: right;
+}
+
+.userChoicesInscription .userChoicesInscription_close {
+  width: 20%;
+  height: 4px;
+  margin: 15px auto;
+  cursor: pointer;
+  background-color: silver;
+}
+
+.userChoicesInscription.open {
+  bottom: 0;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
+}
+/*# sourceMappingURL=index.css.map */
