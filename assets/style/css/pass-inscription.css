@@ -1,0 +1,83 @@
+body {
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: #6200EE;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+}
+
+main .title {
+  width: 60%;
+  text-align: center;
+  margin: auto;
+}
+
+main .title h3 {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+main .form {
+  width: 100%;
+}
+
+main .form form {
+  width: 100%;
+  text-align: center;
+}
+
+main .form form .form_input {
+  width: 80%;
+  display: block;
+  margin: 30px auto;
+  padding: 15px;
+  background: transparent;
+  border: 1px solid white;
+}
+
+main .form form .form_input:focus {
+  outline: none;
+}
+
+main .form form .form_input::-webkit-input-placeholder {
+  color: white;
+}
+
+main .form form .form_input:-ms-input-placeholder {
+  color: white;
+}
+
+main .form form .form_input::-ms-input-placeholder {
+  color: white;
+}
+
+main .form form .form_input::placeholder {
+  color: white;
+}
+
+main .form form .form_submit {
+  padding: 10px;
+  background-color: #3D39BC;
+  color: white;
+  border: none;
+}
+/*# sourceMappingURL=pass-inscription.css.map */

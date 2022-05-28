@@ -1,0 +1,60 @@
+@import "../../utiles/variables";
+
+body{
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background-color: $zekoBlueColor;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main{
+    height: fit-content;
+    width: 100%;
+    .title{
+        width: 60%;
+        text-align: center;
+        margin: auto;
+        h3{
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+
+    .form{
+        width: 100%;
+        form{
+            width: 100%;
+            text-align: center;
+
+            .form_input{
+                width: 80%;
+                display: block;
+                margin: 30px auto;
+                padding: 15px;
+                background: transparent;
+                border:  1px solid white;
+                &:focus{
+                    outline: none;
+                }
+
+                &::placeholder{
+                    color: white;
+                }
+            }
+
+            .form_submit{
+               padding: 10px;
+               background-color: $zekoBlueBoldColor;
+               color: white;
+               border: none;
+            }
+        }
+    }
+}

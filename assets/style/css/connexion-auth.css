@@ -1,0 +1,111 @@
+body {
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: #6200EE;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  text-align: center;
+}
+
+main p {
+  color: white;
+  margin-top: 50px;
+}
+
+main .title {
+  width: 70%;
+  text-align: center;
+  margin: auto;
+}
+
+main .title h3 {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+main .pass-reade {
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: auto;
+}
+
+main .pass-reade .reade {
+  height: 15px;
+  width: 15px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+main .pass-reade .reade.on {
+  background-color: #c0c0c0;
+}
+
+main .keyborard {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  bottom: -100vh;
+  margin: 0;
+  background-color: #c0c0c0;
+}
+
+main .keyborard .keyborard_sect {
+  display: -ms-grid;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  -ms-grid-columns: repeat(3, 1fr);
+}
+
+main .keyborard .keyborard_sect .keyborard_sect--number {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #c0c0c0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+main .keyborard .keyborard_sect .keyborard_sect--number.validator {
+  color: #6200EE;
+  font-weight: bold;
+}
+
+main .keyborard.active {
+  bottom: 0;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
+}
+/*# sourceMappingURL=connexion-auth.css.map */
