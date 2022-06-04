@@ -40,8 +40,7 @@ main{
         justify-content: space-between;
         height: fit-content;
         align-items: center;
-        margin: auto;
-
+        margin:30px auto;
         .reade{
             height: 15px;
             width: 15px;
@@ -58,7 +57,7 @@ main{
         width: 100%;
         height: auto;
         position: absolute;
-        bottom: -100vh;
+        bottom: 0;
         margin: 0;
         background-color: #c0c0c0;
         .keyborard_sect{
@@ -74,17 +73,12 @@ main{
                 box-sizing: border-box;
                 border: 1px solid #c0c0c0;
                 cursor: pointer;
-                font-size: 16px;
+                font-size: 16p;
                 &.validator{
                     color: $zekoBlueColor;
                     font-weight: bold;
                 }
             }
-        }
-
-        &.active{
-            bottom: 0;
-            transition: .2s ease;
         }
     }
 }

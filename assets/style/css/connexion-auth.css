@@ -56,7 +56,7 @@ main .pass-reade {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: auto;
+  margin: 30px auto;
 }
 
 main .pass-reade .reade {
@@ -74,7 +74,7 @@ main .keyborard {
   width: 100%;
   height: auto;
   position: absolute;
-  bottom: -100vh;
+  bottom: 0;
   margin: 0;
   background-color: #c0c0c0;
 }
@@ -95,17 +95,11 @@ main .keyborard .keyborard_sect .keyborard_sect--number {
           box-sizing: border-box;
   border: 1px solid #c0c0c0;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 16p;
 }
 
 main .keyborard .keyborard_sect .keyborard_sect--number.validator {
   color: #6200EE;
   font-weight: bold;
-}
-
-main .keyborard.active {
-  bottom: 0;
-  -webkit-transition: .2s ease;
-  transition: .2s ease;
 }
 /*# sourceMappingURL=connexion-auth.css.map */

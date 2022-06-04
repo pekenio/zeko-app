@@ -1,0 +1,150 @@
+@import "../../utiles/variables";
+
+body{
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    display: grid;
+    -ms-grid-columns: repeat(1,1fr);
+    grid-template-columns: repeat(1,1fr);
+}
+
+header{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+
+    .profil{
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+
+        a{
+            color: silver;
+
+            i{
+                font-size: 30px;
+            }
+        }
+    }
+    .notif{
+        height: fit-content;
+        width: fit-content;
+
+        i{
+            color: #707070;
+            font-size: 20px;
+
+            &.active{
+                color: $zekoBlueColor;
+            }
+        }
+    }
+    .search-bar{
+        display: flex;
+        align-items: center;
+        background-color: rgba(192, 192, 192,.2);
+        height: fit-content;
+        width: fit-content;
+        box-sizing: border-box;
+        padding: 3px;
+        border-radius: 20px;
+        input{
+            background: transparent;
+            border: none;
+            padding: 5px;
+            &:focus{
+                outline: none;
+            }
+        }
+
+        i{
+            font-size: 20px;
+            color: #707070;
+        }
+    }
+}
+
+main{
+    height: fit-content;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 85vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    .chat{
+        width: 90%;
+        margin:20px auto;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        img{
+            height: 40px;
+            width: 40px;
+            border-radius:50% ;
+        }
+
+        .last-msg{
+            width: 80%;
+            height: 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+            .user-name{
+                font-weight: bold;
+            }
+
+            .user-message{
+                color: silver;
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+footer{
+    position: absolute;
+    height: fit-content;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    background-color: $zekoBlueColor;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    .chatOptionBars{
+        height: 45px;
+        width: 100%;
+        padding-top: 10px;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+
+        .option{
+            display: flex;
+            height: 100%;
+            cursor: pointer;
+            margin: 0;
+            padding-bottom: 5px;
+            flex-direction: column;
+            align-items: center;
+            color: silver;
+            font-size: 18px;
+            justify-content: space-between;
+
+            &.active{
+                border-bottom: 1px solid black;
+            }
+        }
+    }
+}
