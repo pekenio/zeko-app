@@ -142,6 +142,12 @@ footer{
             font-size: 18px;
             justify-content: space-between;
 
+            i{
+                font-size: 25px;
+            }
+            span{
+                font-size: 10px;
+            }
             &.active{
                 border-bottom: 1px solid black;
             }

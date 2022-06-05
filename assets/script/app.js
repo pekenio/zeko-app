@@ -47,9 +47,7 @@ userChoicesInscription_close.addEventListener('click',(e)=>{
 nextSection.forEach((nexter)=>{
     nexter.addEventListener('click',()=>{
         let steps = document.querySelectorAll('.userChoicesInscription .steps .number')
-        let selectNumber = document.querySelector('.userChoicesInscription .steps .number.selected')
         stepControl.style = "transform:translateX("+(-(etape * userChoicesInscription_formWidth))+"px)"
-        selectNumber.classList.remove('selected')
         steps[etape].classList.add('selected')
         etape += 1
     })

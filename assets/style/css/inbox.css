@@ -205,6 +205,14 @@ footer .chatOptionBars .option {
           justify-content: space-between;
 }
 
+footer .chatOptionBars .option i {
+  font-size: 25px;
+}
+
+footer .chatOptionBars .option span {
+  font-size: 10px;
+}
+
 footer .chatOptionBars .option.active {
   border-bottom: 1px solid black;
 }

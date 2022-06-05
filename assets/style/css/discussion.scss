@@ -1,0 +1,186 @@
+@import "../../utiles/variables";
+
+body{
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+header{
+    height: fit-content;
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(112, 112, 112,.1);
+
+    .container{
+        height: 35px;
+        width: 90%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .content{
+            &.return{
+                color: $zekoBlueColor;
+            }
+
+            &.user{
+                display: flex;
+                flex-direction: column;
+                height: 90%;
+                align-items: center;
+                justify-content: space-between;
+
+                .user-lastConnect{
+                    font-size: 10px;
+                }
+            }
+            &.profil{
+                height: 100%;
+                width: fit-content;
+
+                img{
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}
+
+main{
+    height: calc(100vh - ((35px)+(40px)));
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    .messageBlockDate{
+        width: 100%;
+        height: fit-content;
+        text-align: center;
+        margin-top: 10px;
+
+        span{
+            font-size: 12px;
+            color: #707070;
+        }
+    }
+
+    .messagebox{
+        width: 90%;
+        margin: auto;
+        height: fit-content;
+        margin-top: 30px;
+        box-sizing: border-box;
+        position: relative;
+        &.sent{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            
+           .messagebox--sent__message{
+                width: 60%;
+                height: fit-content;
+                padding: 10px;
+                background-color: $zekoBlueColor;
+                border-radius: 80px;
+                span{
+                    width: fit-content;
+                    word-wrap: break-word;
+                    color: white;
+                }
+           }
+
+            .messagebox--sent__hour{
+                position: absolute;
+                bottom: -20px;
+                width: fit-content;
+                height: fit-content;
+
+                span{
+                    color: #707070;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        &.receive{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+           .messagebox--receive__message{
+                width: 60%;
+                height: fit-content;
+                padding: 10px;
+                background-color: rgba(112, 112, 112,.1);
+                border-radius: 80px;
+                span{
+                    width: fit-content;
+                    word-wrap: break-word;
+                    color: black;
+                }
+           }
+
+            .messagebox--receive__hour{
+                position: absolute;
+                bottom: -20px;
+                width: fit-content;
+                height: fit-content;
+
+                span{
+                    color: #707070;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+footer{
+    height: 50px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(112, 112, 112,.1);
+    position: absolute;
+    bottom: 0;
+    
+    .contents{
+        display: flex;
+        height: 100%;
+        width: 95%;
+        justify-content: space-between;
+        align-items: center;
+        margin: auto;
+
+        i{
+            font-size: 20px;
+            color: #707070;
+        }
+        .writeText{
+            width: 80%;
+            height: 80%;
+            background-color: white;
+            border-radius: 30px;
+            input{
+                width: 100%;
+                margin: auto;
+                height: 100%;
+                border: none;
+                outline: none;
+                border-radius: 30px;
+                padding: 5px;
+                box-sizing: border-box;
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+    }
+}
