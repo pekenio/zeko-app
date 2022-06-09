@@ -5,19 +5,24 @@ body{
     width: 100%;
     padding: 0;
     margin: 0;
-    overflow: hidden;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 header{
-    height: fit-content;
+    height: 40px;
     width: 100%;
     overflow: hidden;
     padding: 0;
     margin: 0;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
     background-color: rgba(112, 112, 112,.1);
 
     .container{
-        height: 35px;
+        height: 100%;
         width: 90%;
         margin: auto;
         display: flex;
@@ -45,8 +50,8 @@ header{
                 width: fit-content;
 
                 img{
-                    height: 30px;
-                    width: 30px;
+                    height: 40px;
+                    width: 40px;
                     border-radius: 50%;
                 }
             }
@@ -55,11 +60,13 @@ header{
 }
 
 main{
-    height: calc(100vh - ((35px)+(40px)));
+    height: calc(100vh - ((80px)));
     width: 100%;
     padding: 0;
-    margin: 0;
-
+    margin-top: 40px;
+    position: initial;
+    overflow-x: hidden;
+    overflow-y: scroll;
     .messageBlockDate{
         width: 100%;
         height: fit-content;
@@ -143,14 +150,13 @@ main{
 }
 
 footer{
-    height: 50px;
+    height: 40px;
     width: 100%;
     padding: 0;
     margin: 0;
-    background-color: rgba(112, 112, 112,.1);
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    
+    background-color: rgba(112, 112, 112,.1);
     .contents{
         display: flex;
         height: 100%;

@@ -3,22 +3,25 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 header {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  height: 40px;
   width: 100%;
   overflow: hidden;
   padding: 0;
   margin: 0;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
   background-color: rgba(112, 112, 112, 0.1);
 }
 
 header .container {
-  height: 35px;
+  height: 100%;
   width: 90%;
   margin: auto;
   display: -webkit-box;
@@ -65,16 +68,19 @@ header .container .content.profil {
 }
 
 header .container .content.profil img {
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
 }
 
 main {
-  height: calc(100vh - ((35px)+(40px)));
+  height: calc(100vh - ((80px)));
   width: 100%;
   padding: 0;
-  margin: 0;
+  margin-top: 40px;
+  position: initial;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 main .messageBlockDate {
@@ -198,13 +204,13 @@ main .messagebox.receive .messagebox--receive__hour span {
 }
 
 footer {
-  height: 50px;
+  height: 40px;
   width: 100%;
   padding: 0;
   margin: 0;
-  background-color: rgba(112, 112, 112, 0.1);
-  position: absolute;
+  position: fixed;
   bottom: 0;
+  background-color: rgba(112, 112, 112, 0.1);
 }
 
 footer .contents {
