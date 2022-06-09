@@ -40,8 +40,12 @@ exports.login = (requ,resp,next)=>{
     .then(result=>{
         if(result){
             if(result.password.trim() !== ""){
-                const accestoken =  jwt.sign({userId : result._id},'pekenio2022',{ expiresIn: '24h' })
-                resp.status(200).json({accestoken})
+                if(result.password == requ.body.password){
+                    const accestoken =  jwt.sign({userId : result._id},'pekenio2022',{ expiresIn: '24h' })
+                    resp.status(200).json({accestoken})
+                }else{
+                    resp.status(404).json({err:"Le mot de passe est incorrect"})
+                }
             }else{
     
                resp.status(300).json({err : 'Inscription non finalisee nous vous envoyons un mail pour la finaliser'})
