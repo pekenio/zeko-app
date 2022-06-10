@@ -4,8 +4,9 @@ const userControll = require('../controller/user')
 
 route.post('/singnin/',userControll.singnin,userControll.updateOtpcode)
 route.post('/login/',userControll.updateOtpcode,userControll.login)
-route.post('/find/',userControll.getUser)
+route.post('/getuser/',userControll.getUser)
 route.put('/updateprofil/info/',userControll.updateProfilInfo)
+route.put('/updateprofil/avatar/',userControll.updateProfilAvatar)
 route.put('/updateprofil/email/',userControll.updateEmail,userControll.updateOtpcode)
 route.post('/otpcode/',userControll.updateOtpcode,userControll.sendOtpCode)
 

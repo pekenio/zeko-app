@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCUMENTATION API ZEKO</title>
+    <style>
+        @media screen and (max-width:750px) {
+            main{
+                width: 90%;
+                margin: auto;
+                font-size: xx-small;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>DOCUMENTATION API ZEKO</h1>
+        <ul>
+            <h2>Connexion utilisateur</h2>
+            <ul>
+                <h3>Outils</h3>
+                <ul>
+                    <li>Chemin d'acces : /user/login/</li>
+                    <li>Methode POST</li>
+                    <li>id de Connexion : email avec pour name 'email'</li>
+                    <li>Mot de pass : avec pour name 'password'</li>
+                </ul>
+
+            </ul>
+            <h2>Inscription utilisateur</h2>
+            <ul>
+                <h3>Outils</h3>
+                <ul>
+                    <li>Chemin d'acces : /user/singnin/</li>
+                    <li>Methode POST</li>
+                    <h4>Informations & name</h4>
+                    <ul>
+                        <li>Nom : de type alphabet et pour name 'name'</li> 
+                        <li>Prenom : de type alphabet et pour name 'lastName' </li> 
+                        <li>email : de type email et pour name 'email'</li> 
+                        <li>age : de type numerique et pour name 'age'</li> 
+                        <li>adresse : de type alpha-numerique et pour name 'adresse'</li> 
+                        <li>pays : de type alphabet et pour name 'pays' </li> 
+                        <li>sexe : de type alphabet et pour name 'sexe'</li> 
+                    </ul>
+                </ul>
+
+            </ul>
+            <h2>Recuperer les Informations de l'utilisateur quelconque</h2>
+            <ul>
+                <h3>Outils</h3>
+                <ul>
+                    <li>Chemin d'acces : /user/getuser/</li>
+                    <li>Methode POST</li>
+                    <h4>Informations & name</h4>
+                    <ul>
+                        <li>ID de l'utilisateur : Obligatoire. Avec  pour name 'userId'</li> 
+                    </ul>
+                </ul>
+
+            </ul>
+            <h2>Modifier les Informations du profil de l'utilisateur quelconque (Nom ou prenom ou biographie)</h2>
+            <ul>
+                <h3>Outils</h3>
+                <ul>
+                    <li>Chemin d'acces : /user/updateprofil/info/</li>
+                    <li>Methode PUT</li>
+                    <h4>Informations & name</h4>
+                    <ul>
+                        <li>ID de l'utilisateur : Obligatoire. Avec  pour name 'userId'</li> 
+                        <li>Nom : pour name 'name'</li> 
+                        <li>Prenom : pour name 'lastName' </li> 
+                        <li>Biographie : pour name 'biographie'</li> 
+                    </ul>
+                </ul>
+            </ul>
+            <h2>Modifier l'avatars du l'utilisateur quelconque</h2>
+            <ul>
+                <h3>Outils</h3>
+                <ul>
+                    <li>Chemin d'acces : /user/updateprofil/avatar/</li>
+                    <li>Methode PUT</li>
+                    <h4>Informations & name</h4>
+                    <ul>
+                        <li>ID de l'utilisateur : Obligatoire. Avec  pour name 'userId'</li> 
+                        <li>URL : Lien d'acces de l'image en question avec pour name 'profimage'</li> 
+                    </ul>
+                </ul>
+
+            </ul>
+            <h2>Modifier l'adresse email de l'utilisateur quelconque</h2>
+            <ul>
+                <h3>Outils</h3>
+                <ul>
+                    <li>Chemin d'acces : /user/updateprofil/email/</li>
+                    <li>Methode PUT</li>
+                    <h4>Informations & name</h4>
+                    <ul>
+                        <li>ID de l'utilisateur : Obligatoire. Avec  pour name 'userId'</li> 
+                        <li>Code : code de confirmation reçu par mail avec pour name 'otpcode'</li> 
+                    </ul>
+                </ul>
+
+            </ul>
+            <h2>Envoyer un nouveau code de confirmation</h2>
+            <ul>
+                <h3>Outils</h3>
+                <ul>
+                    <li>Chemin d'acces : /user/otpcode/</li>
+                    <li>Methode POST</li>
+                    <h4>Informations & name</h4>
+                    <ul>
+                        <li>ID de l'utilisateur : Obligatoire. Avec  pour name 'userId'</li> 
+                    </ul>
+                </ul>
+
+            </ul>
+        </ul>
+    </main>
+</body>
+</html>

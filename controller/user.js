@@ -41,8 +41,8 @@ exports.login = (requ,resp,next)=>{
         if(result){
             if(result.password.trim() !== ""){
                 if(result.password == requ.body.password){
-                    const accestoken =  jwt.sign({userId : result._id},'pekenio2022',{ expiresIn: '24h' })
-                    resp.status(200).json({accestoken})
+                    // const accestoken =  jwt.sign({userId : result._id},'pekenio2022',{ expiresIn: '360h' })
+                    resp.status(200).json({accesID : result._id})
                 }else{
                     resp.status(404).json({err:"Le mot de passe est incorrect"})
                 }
@@ -61,21 +61,24 @@ exports.login = (requ,resp,next)=>{
 }
 
 exports.getUser = (requ,resp,next)=>{
-    User.findById(requ.body.id).exec()
+    User.findById(requ.body.userId).exec()
     .then(response =>{
         resp.status(200).json({response})
+    })
+    .catch(err =>{
+        resp.status(500).json({err})
     })
 }
 
 exports.updateProfilInfo = (requ,resp,next)=>{
-    User.updateOne({_id : requ.body.userId},{
+    User.updateOne({id : requ.body.userId},{
         _id : requ.body.userId ,
         name : requ.body.name , 
         lastName : requ.body.lastName,
         biographie : requ.body.biographie
     })
     .then(effectue =>{
-        if(effectue){
+        if(effectue.matchedCount > 0){
             resp.status(200).json({success : 'Votre modification a ete une reussite'})
         }else{
             resp.status(400).json({error : 'Une erreur est survenue'})
@@ -86,7 +89,7 @@ exports.updateProfilInfo = (requ,resp,next)=>{
     })
 }
 
-exports.updateProfilName = ()=>{
+exports.updateProfilAvatar = ()=>{
     User.updateOne({_id : requ.body.userId},{
         _id : requ.body.userId,
         proflimage : requ.body.profimage
@@ -94,7 +97,7 @@ exports.updateProfilName = ()=>{
 }
 
 exports.updateEmail = (requ,resp,next)=>{
-    User.updateOne({_id : requ.body.userId , otpcode : requ.body.otpcode},{
+    User.updateOne({_id : requ.body.userId},{
         _id : requ.body.userId,
         email : requ.body.email
     })
