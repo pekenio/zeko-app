@@ -3,12 +3,13 @@ const app = express();
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 const userRoute = require('./routes/user');
-const multipart = require('connect-multiparty');
+const fileupload = require('express-fileupload')
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger.json');
 
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(fileupload())
 app.use(express.static(__dirname +'/assets/'));
 mongoose.connect('mongodb+srv://coulibaly:Coulibal7@cluster0.fmdjk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
   { useNewUrlParser: true,
@@ -38,7 +39,6 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
-app.use(multipart())
 
 app.use('/user',userRoute)
 

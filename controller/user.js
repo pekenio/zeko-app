@@ -6,7 +6,7 @@ exports.singnin = (requ,resp,next)=>{
    User.findOne({email : requ.body.email})
    .then(user =>{
        if(user){
-           resp.status(200).json({error : 'utilisateur existe deja'})
+           resp.status(200).json({status:false,error : 'utilisateur existe deja'})
        }else{
             const Newuser =  new User({
                 name : requ.body.name,
@@ -25,11 +25,11 @@ exports.singnin = (requ,resp,next)=>{
             Newuser.save()
             .then(success =>{
                 if(success){
-                    resp.status(201).json({cree : 'Utilisateur cree avec succes'})
+                    resp.status(201).json({status:true,cree : 'Utilisateur cree avec succes'})
                 }
             })
             .catch(err =>{
-                resp.status(400).json({err:err})
+                resp.status(400).json({status:false,err:err})
             })
        }
    })
@@ -42,16 +42,16 @@ exports.login = (requ,resp,next)=>{
             if(result.password.trim() !== ""){
                 if(result.password == requ.body.password){
                     const accestoken =  jwt.sign({userId : result._id},'pekenio2022',{ expiresIn: '360h' })
-                    resp.status(200).json({accesID : result._id, AuthCode : accestoken})
+                    resp.status(200).json({status:true,accesID : result._id, AuthCode : accestoken,nom: result.name , prenom : response.lastName , age : result.age , biographie : result.biographie , email : result.email , sexe : result.sexe , adresse : result.adresse , pays : result.pays , pseudo : result.pseudo})
                 }else{
-                    resp.status(200).json({err:"Le mot de passe est incorrect"})
+                    resp.status(200).json({status:false,err:"Le mot de passe est incorrect"})
                 }
             }else{
-               resp.status(300).json({err : 'Inscription non finalisee nous vous envoyons un mail pour la finaliser vellez cliquer sur le lien reçu par mail'})
+               resp.status(300).json({status:false,err : 'Inscription non finalisee nous vous envoyons un mail pour la finaliser vellez cliquer sur le lien reçu par mail'})
                mailer.send(result.email,"Finalisation de votre iscription","Votre code d'authentification est "+ result.otpcode)
             }
         }else{
-            resp.status(200).json({err:"Utilisateur non trouve"})
+            resp.status(200).json({status:false,err:"Utilisateur non trouve"})
         }
     })
     .catch(err=>{
@@ -62,10 +62,10 @@ exports.login = (requ,resp,next)=>{
 exports.getUser = (requ,resp,next)=>{
     User.findById(requ.body.userId).exec()
     .then(response =>{
-        resp.status(200).json({nom : response.name , prenom : response.lastName , age : response.age , biographie : response.biographie , email : response.email , sexe : response.sexe , adresse : response.adresse , pays : response.pays , pseudo : response.pseudo})
+        resp.status(200).json({status:true,nom : response.name , prenom : response.lastName , age : response.age , biographie : response.biographie , email : response.email , sexe : response.sexe , adresse : response.adresse , pays : response.pays , pseudo : response.pseudo})
     })
     .catch(err =>{
-        resp.status(500).json({err})
+        resp.status(500).json({status:false,err})
     })
 }
 
@@ -78,13 +78,13 @@ exports.updateProfilInfo = (requ,resp,next)=>{
     })
     .then(effectue =>{
         if(effectue.matchedCount > 0){
-            resp.status(200).json({success : 'Votre modification a ete une reussite'})
+            resp.status(200).json({status:true,success : 'Votre modification a ete une reussite'})
         }else{
-            resp.status(200).json({error : 'Une erreur est survenue'})
+            resp.status(200).json({status:false,error : 'Une erreur est survenue'})
         }
     })
     .catch(err=>{
-        resp.status(500).json({err})
+        resp.status(500).json({status:false,err})
     })
 }
 
@@ -107,11 +107,11 @@ exports.updateEmail = (requ,resp,next)=>{
         if(success.matchedCount > 0){
             next()
         }else{
-            resp.status(200).json({error : "Code incorrect"})
+            resp.status(200).json({status:false,error : "Code incorrect"})
         }
     })
     .catch(err =>{
-        resp.status(500).json({err})
+        resp.status(500).json({status:false,err:err})
     })
 }
 
@@ -128,7 +128,7 @@ exports.updateOtpcode = (requ,resp,next)=>{
         next()
     })
     .catch(err =>{
-        resp.status(500).json({err})
+        resp.status(500).json({status:false,err})
     })
 }
 
@@ -137,13 +137,13 @@ exports.sendOtpCode = (requ,resp,next)=>{
     .then(result =>{
         if(result){
             mailer.send(result.email,"Code d'authentification","Votre code d'authentification est "+ result.otpcode)
-            resp.status(200).json({success : 'Code transfere'})
+            resp.status(200).json({status:true,success : 'Code transfere'})
         }else{
-            resp.status(200).json({result : 'Une erreur vient de se produire'})
+            resp.status(200).json({status:false,result : 'Une erreur vient de se produire'})
         }
     })
     .catch(err =>{
-        resp.status(500).json({err})
+        resp.status(500).json({status:false,err:err})
     })
 
 }
@@ -159,6 +159,6 @@ exports.deleteOtpCode = (requ,resp,next)=>{
         }
     })
     .catch(err =>{
-        resp.status(500).json({err})
+        resp.status(500).json({status:false,err:err})
     })
 }

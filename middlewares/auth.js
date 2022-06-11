@@ -4,7 +4,7 @@ exports.authentification = (requ,resp,next) => {
     const token = requ.body.token
     jwt.verify(token,'pekenio2022',(err,decodeToken) =>{
         if(err){
-            resp.status(500).json({err : "Le token d'authentification est ivalide"})
+            resp.status(500).json({status:false,err : "Le token d'authentification est ivalide"})
         }else{
             const id = decodeToken.userId
             User.findOne({_userId : id})
@@ -12,11 +12,11 @@ exports.authentification = (requ,resp,next) => {
                 if(sucees){
                     next()
                 }else{
-                    resp.status(500).json({err : "Utilisateur non inconnu"})
+                    resp.status(200).json({status:false,err : "Utilisateur non inconnu"})
                 }
             })
             .catch(err =>{
-                resp.status(404).json({erreur : "Une erreur est survenue"})
+                resp.status(404).json({status:false,err : "Une erreur est survenue"})
             })
         }
     })

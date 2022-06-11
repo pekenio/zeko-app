@@ -29,7 +29,6 @@
 
 const multer = require('multer')
 
-
 const MINE_TYPES = {
     'image/jpg':'jpg',
     'image/jpeg':'jpeg',
@@ -40,13 +39,15 @@ const MINE_TYPES = {
 
 const storage = multer.diskStorage({
     destination : (requ,file,callback)=>{
-        callback(null,'./assets/avatars')
+        
+        callback(null,'../assets/avatars')
     },
     filename : (requ,file,callback)=>{
+        console.log(file)
         const name = file.originalname.split(' ').join('_')
         const extension = MINE_TYPES[file.mimetype]
         callback(null,name + Date.now() + '.' + extension)
     }
 })
 
-module.exports = multer({storage}).single()
+module.exports = multer({storage}).single('image')
