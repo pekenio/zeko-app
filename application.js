@@ -4,7 +4,7 @@ const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 const userRoute = require('./routes/user');
 const multipart = require('connect-multiparty');
-const swaggerUi = require('swagger-ui-express');
+// const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger.json');
 
 app.use(bodyparser.json());
@@ -31,7 +31,7 @@ mongoose.connect('mongodb+srv://coulibaly:Coulibal7@cluster0.fmdjk.mongodb.net/m
   //     ]
   //   }
   // }
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, multipart/form-data, Authorization');
