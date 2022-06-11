@@ -44,14 +44,14 @@ exports.login = (requ,resp,next)=>{
                     const accestoken =  jwt.sign({userId : result._id},'pekenio2022',{ expiresIn: '360h' })
                     resp.status(200).json({accesID : result._id, AuthCode : accestoken})
                 }else{
-                    resp.status(404).json({err:"Le mot de passe est incorrect"})
+                    resp.status(200).json({err:"Le mot de passe est incorrect"})
                 }
             }else{
                resp.status(300).json({err : 'Inscription non finalisee nous vous envoyons un mail pour la finaliser vellez cliquer sur le lien reçu par mail'})
                mailer.send(result.email,"Finalisation de votre iscription","Votre code d'authentification est "+ result.otpcode)
             }
         }else{
-            resp.status(404).json({err:"Utilisateur non trouve"})
+            resp.status(200).json({err:"Utilisateur non trouve"})
         }
     })
     .catch(err=>{
@@ -80,7 +80,7 @@ exports.updateProfilInfo = (requ,resp,next)=>{
         if(effectue.matchedCount > 0){
             resp.status(200).json({success : 'Votre modification a ete une reussite'})
         }else{
-            resp.status(400).json({error : 'Une erreur est survenue'})
+            resp.status(200).json({error : 'Une erreur est survenue'})
         }
     })
     .catch(err=>{
@@ -107,7 +107,7 @@ exports.updateEmail = (requ,resp,next)=>{
         if(success.matchedCount > 0){
             next()
         }else{
-            resp.status(404).json({error : "Code incorrect"})
+            resp.status(200).json({error : "Code incorrect"})
         }
     })
     .catch(err =>{
@@ -128,7 +128,7 @@ exports.updateOtpcode = (requ,resp,next)=>{
         next()
     })
     .catch(err =>{
-        resp.status(400).json({err})
+        resp.status(500).json({err})
     })
 }
 
@@ -139,7 +139,7 @@ exports.sendOtpCode = (requ,resp,next)=>{
             mailer.send(result.email,"Code d'authentification","Votre code d'authentification est "+ result.otpcode)
             resp.status(200).json({success : 'Code transfere'})
         }else{
-            resp.status(400).json({result : 'Une erreur vient de se produire'})
+            resp.status(200).json({result : 'Une erreur vient de se produire'})
         }
     })
     .catch(err =>{
