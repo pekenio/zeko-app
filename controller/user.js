@@ -41,15 +41,14 @@ exports.login = (requ,resp,next)=>{
         if(result){
             if(result.password.trim() !== ""){
                 if(result.password == requ.body.password){
-                    // const accestoken =  jwt.sign({userId : result._id},'pekenio2022',{ expiresIn: '360h' })
-                    resp.status(200).json({accesID : result._id})
+                    const accestoken =  jwt.sign({userId : result._id},'pekenio2022',{ expiresIn: '360h' })
+                    resp.status(200).json({accesID : result._id, AuthCode : accestoken})
                 }else{
                     resp.status(404).json({err:"Le mot de passe est incorrect"})
                 }
             }else{
-    
-               resp.status(300).json({err : 'Inscription non finalisee nous vous envoyons un mail pour la finaliser'})
-               this.sendOtpCode()
+               resp.status(300).json({err : 'Inscription non finalisee nous vous envoyons un mail pour la finaliser vellez cliquer sur le lien reçu par mail'})
+               mailer.send(result.email,"Finalisation de votre iscription","Votre code d'authentification est "+ result.otpcode)
             }
         }else{
             resp.status(404).json({err:"Utilisateur non trouve"})
@@ -63,7 +62,7 @@ exports.login = (requ,resp,next)=>{
 exports.getUser = (requ,resp,next)=>{
     User.findById(requ.body.userId).exec()
     .then(response =>{
-        resp.status(200).json({response})
+        resp.status(200).json({nom : response.name , prenom : response.lastName , age : response.age , biographie : response.biographie , email : response.email , sexe : response.sexe , adresse : response.adresse , pays : response.pays , pseudo : response.pseudo})
     })
     .catch(err =>{
         resp.status(500).json({err})
@@ -89,11 +88,13 @@ exports.updateProfilInfo = (requ,resp,next)=>{
     })
 }
 
-exports.updateProfilAvatar = ()=>{
-    User.updateOne({_id : requ.body.userId},{
-        _id : requ.body.userId,
-        proflimage : requ.body.profimage
-    })
+exports.updateProfilAvatar = (requ,resp,next)=>{
+    // User.updateOne({_id : requ.body.userId},{
+    //     _id : requ.body.userId,
+    //     proflimage : requ.file.filename
+    // })
+
+    console.log(requ.body)
 }
 
 exports.updateEmail = (requ,resp,next)=>{
@@ -106,7 +107,7 @@ exports.updateEmail = (requ,resp,next)=>{
         if(success.matchedCount > 0){
             next()
         }else{
-            resp.status(404).json({error : "Code d'authentification incorrect"})
+            resp.status(404).json({error : "Code incorrect"})
         }
     })
     .catch(err =>{

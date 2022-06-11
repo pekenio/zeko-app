@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "zeko-app-1b172",
+  "private_key_id": "a9551f19f3916727e98ac1308336d8647f688875",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCVTushTAEd2zyU\nuZf0oPnPPMoD8O3zYuWGDWoLZzK6H/AW5sbon8I52D6StDgQ9G+pUNA6XQyB/3r4\nwUX+sftMaVR0UuXUTIzn0Y8Yx337bqZiXTRGq3TT0LRV7CfsTQ5gOrwNW/ZiBQ/M\nJ95MLq014XAN7ApIg5M4li0Z82KhrS3aLblzHnlXr8EPWSo2Dig8Oyp7a7x/XQtL\nXZc2bVXY9q8o642VtNS6LzORIxvnNNCEanVWwMxnXwM1bvSmQXljnjVDnDdKFW7W\nqrzi43rfYeamcg57xFq4VYyHniOpsulRGg9CE3DjmzlV2x56HH6NcJ04JRVEwGxm\nmj/YaN7NAgMBAAECggEAAx9P3nXi7hdoGGobKeP15WYNiXCP4U+XoiqEpbFmR6sk\nT65KyZGRs7j4cgPvyjb6YM2OVTId8VgA39PW3WEmcq4fNIGJSdvB9JUWy3tcgJYL\nR7JQRgwO2OEb7FIQcaoY211PEm5yZBFcB7ZruSceuyo4OCpP+r05pmzJi6nhzaSz\nybZRDbSWz7JPYWjKsDKJNKd9I5cXMg9G2yU/Prs6vtDqXvIMVHZa4WG+bOJP8wix\nxmUHkh5FbdOKMLIhSFJs92pBKk7hKivKfsLwK8c1vV/jE3p37EPN7hjygFpOI53/\nd+A0ZtVQU3gq6BBgjcaSTg1Aqtk5kJFRWYCvaQiM4QKBgQDMzWMp31mWZopJjcR7\nvNmlwKBEQ0EJgUvHDItClyXO8rWMehqhfyBYfO+WWnpURz1Q86wmjT207EduLFWm\nxYLZaZYgdSxoDBsPbOQQx/rUo8L++tnXp/rPcfwixdLHDGrwpB1TmKCL0vDB/7Oi\nv+TdMCECT5IxrsQtYtI9/6PoUQKBgQC6ohzjEdPrkxLF6xY0UBGY9LQ/lcz4E+1r\nBP1oJWbRs5p7J8ef3+iSVHskzSuQ7FacmFhTPhm7R7rWFsSw4yJRjaZ3g831VqSa\nhf6JOk/xTtY0d6hj5O4Gk5x0EWeFuS5dYX2RiHCHtYMTc80lllRhpR9HNM42R9WY\nbcemXuTrvQKBgQDDNWW2rKhUvipDj7hfhRMjdWaNilk8eRxEfwViFHW6Owem/V/S\n3Tx0e6lWc6k0Ga8tMQW+vVO61pgDQIjnbE2bc5PgHi+UgS1t14nPIP5JnkooBeyM\nLRXYkzoT3uFYTtLDynoVi15DyG0pTNPpZeT8m3prHHMpnf5pkE77P2b48QKBgEJ6\nXC/Fuea/jIBTLKWVn68L+uhrQ4daEcd9D4Z5TBaGExCrKsAX0Y/N589EBbCpfnBp\nE40TIbdD5Zk8ovMe9Kp3+kO3/zTUl+0yrWfUDYW2vzYRKTnr4Z0WFzSAvo8zVwCM\nKV4da3frf7T+GqS413Wwi2Ohu5I6JCsXb3YjdwdBAoGBAIaI/LTTRZF31yWlQl6J\nKBeYtIcsX/EYeWaz3Trb58dYS2U/wdG7a/vq2Qoa7lKkPUiu2ExhB5k5uP2Pq8T+\nBcM2Y3L2WIctHsIR4qhQ0Oxd65h5OwS63wDu3IoCsO7YOyGk32LJH8DoO3uf6mjj\nVp+5LG+6NxsLJ1kOaDHKdAXZ\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-gpub8@zeko-app-1b172.iam.gserviceaccount.com",
+  "client_id": "105191319803863370678",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-gpub8%40zeko-app-1b172.iam.gserviceaccount.com"
+}
