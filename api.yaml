@@ -195,7 +195,7 @@ paths:
 
   /user/updateprofil/email:
       put:
-        summary: Modifier a jour l'email d'un utilisateur
+        summary: Modifier l'email d'un utilisateur
         produces:
           - application/x-www-form-urlencoded
         consumes:
