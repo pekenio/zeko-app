@@ -78,6 +78,9 @@ paths:
         - name: email
           in: formData
           required: true
+        - name: password
+          in: formData
+          required: true
         - name: age
           in: formData
           required: true
