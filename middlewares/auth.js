@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 exports.authentification = (requ,resp,next) => {
-    const token = requ.body.token
+    const token = requ.headers.token
     jwt.verify(token,'pekenio2022',(err,decodeToken) =>{
         if(err){
             resp.status(500).json({status:false,err : "Le token d'authentification est ivalide"})

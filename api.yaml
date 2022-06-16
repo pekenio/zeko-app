@@ -1,0 +1,254 @@
+swagger: '2.0'
+info: 
+  title: Zeko-app API
+  version: 1.0.0
+  description: Documentaton de l'api Zeko-app
+  contact:
+    email: azizcoulibaly009@gmail.com
+  servers:
+    -url: "http://localhost:3000/"
+    description: Serveur local
+schemes: [http,https]
+paths:
+  /user/login:
+    post:
+      summary: Connexion de l'utilisateur
+      produces:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      consumes:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      description: Retourne un token d'authentification et un identifiant
+      responses:
+        status:
+          false:
+            description: Utilisateur non trouve
+          true:
+            description: Utilisateur authentifie
+        500:
+          description: Erreur du serveur
+      parameters:
+        - name: email
+          description: email de l'utilisateur
+          in: body
+          required: true
+        - name: password
+          description: Mot de passe de l'utilisateur
+          in: body
+          required: true
+        
+  /user/singnin:
+      put:
+        summary: Inscription de l'utilisateur
+        produces:
+          - application/x-www-form-urlencoded
+          - text/html
+          - text/plain; charset=utf-8
+          - multipart/form-data
+        consumes:
+          - application/x-www-form-urlencoded
+          - text/html
+          - text/plain; charset=utf-8
+          - multipart/form-data
+        description: Creer un nouvel utilisateur
+        responses:
+          status:
+            false:
+              description: Utilisateur existe deja
+              schema:
+                type: string
+                exemple: Utilisateur non trouve
+            true:
+              description: Utilisateur authentifie
+          500:
+            description: Erreur du serveur
+      parameters:
+        - name: name
+          description: Nom
+          in: body
+          required: true
+        - name: lastName
+          in: body
+          required: true
+        - name: email
+          in: body
+          required: true
+        - name: age
+          in: body
+          required: true
+        - name: pays
+          in: body
+          required: true
+        - name: adresse
+          in: body
+          required: true
+        - name: sexe
+          in: body
+          required: true
+  /user/getuser:
+      post:
+        summary: Recuperer les informations d'un utilisateur
+        produces:
+          - application/x-www-form-urlencoded
+          - text/html
+          - text/plain; charset=utf-8
+          - multipart/form-data
+        consumes:
+          - application/x-www-form-urlencoded
+          - text/html
+          - text/plain; charset=utf-8
+          - multipart/form-data
+        description: Retourne une liste de donnees en JSON
+        responses:
+          status:
+            false:
+              description: Utilisateur non trouve
+            true:
+              description: Utilisateur authentifie
+          500:
+            description: Erreur du serveur
+        parameters:
+          - name: userId
+            description: Identifiant de l'utilisateur
+            in: body
+            required: true
+          - name: token
+            description: Token d'acces
+            in: body
+            required: true
+    
+  /user/updateprofil/info:
+      put:
+        summary: Mettre a jour les informations d'un utilisateur
+        produces:
+          - application/x-www-form-urlencoded
+          - text/html
+          - text/plain; charset=utf-8
+          - multipart/form-data
+        consumes:
+          - application/x-www-form-urlencoded
+          - text/html
+          - text/plain; charset=utf-8
+          - multipart/form-data
+        description: retourne une reponse 
+        responses:
+          status:
+            false:
+              description: Une erreur est survenue
+            true:
+              description: Votre modification a ete une reussite
+          500:
+            description: Erreur du serveur
+        parameters:
+          - name: userId
+            description: Identifiant de l'utilisateur
+            in: body
+            required: true
+          - name: token
+            description: Token d'acces
+            in: body
+            required: true
+          - name: name
+            description: Nom
+            in: body
+            required: true
+          - name: lastName
+            in: body
+            required: true
+          - name: biographie
+            in: body
+            required: true
+
+  /user/updateprofil/avatar:
+      put:
+        summary: Modifier l'image de profil d'un utilisateur
+        produces:
+          - multipart/form-data
+        consumes:
+          - multipart/form-data
+        description: Retourne une liste de donnees en JSON
+        responses:
+          status:
+            false:
+              description: Utilisateur non trouve
+            true:
+              description: Utilisateur authentifie
+          500:
+            description: Erreur du serveur
+        parameters:
+          - name: userId
+            description: Identifiant de l'utilisateur
+            in: body
+            required: true
+          - name: token
+            description: Token d'acces
+            in: body
+            required: true
+          - name: image
+            in: body
+            required: true
+
+  /user/updateprofil/email:
+      put:
+        summary: Modifier a jour l'email d'un utilisateur
+        produces:
+          - application/x-www-form-urlencoded
+        consumes:
+          - application/x-www-form-urlencoded
+        description: retourne une reponse 
+        responses:
+          status:
+            false:
+              description: Une erreur est survenue
+            true:
+              description: Votre modification a ete une reussite
+          500:
+            description: Erreur du serveur
+        parameters:
+          - name: userId
+            description: Identifiant de l'utilisateur
+            in: body
+            required: true
+          - name: token
+            description: Token d'acces
+            in: body
+            required: true
+          - name: email
+            in: body
+            required: true
+          - name: otpcode
+            description: code d'authentification
+            in: body
+            required: true
+
+  /user/otpcode:
+      put:
+        summary: Envoyer un code d'authentification
+        produces:
+          - application/x-www-form-urlencoded
+        consumes:
+          - application/x-www-form-urlencoded
+        description: retourne une reponse 
+        responses:
+          status:
+            false:
+              description: Une erreur est survenue
+            true:
+              description: Code envoye avec succes
+          500:
+            description: Erreur du serveur
+        parameters:
+          - name: userId
+            description: Identifiant de l'utilisateur
+            in: body
+            required: true
+          - name: token
+            description: Token d'acces
+            in: body
+            required: true
+          

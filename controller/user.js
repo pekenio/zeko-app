@@ -1,7 +1,10 @@
 const User = require("../models/user");
 const mailer = require("../config/email");
 const jwt = require("jsonwebtoken");
+const fs = require('fs')
+const pathAvatars = './assets/avatars/'
 const randomstring = require("randomstring");
+
 exports.singnin = (requ,resp,next)=>{
    User.findOne({email : requ.body.email})
    .then(user =>{
@@ -43,7 +46,6 @@ exports.login = (requ,resp,next)=>{
             
             if(result.password !== ""){
                 if(result.password === requ.body.password){
-                    
                     const accestoken =  jwt.sign({userId : result._id},'pekenio2022',{ expiresIn: '360h' })
                     resp.status(200).json({status:true,accesID : result._id, AuthCode : accestoken,nom:result.name , prenom : result.lastName , age : result.age , biographie : result.biographie , email : result.email , sexe : result.sexe , adresse : result.adresse , pays : result.pays , pseudo : result.pseudo})
                 }else{
@@ -75,7 +77,7 @@ exports.getUser = (requ,resp,next)=>{
 exports.updateProfilInfo = (requ,resp,next)=>{
     User.updateOne({id : requ.body.userId},{
         _id : requ.body.userId ,
-        name : requ.body.name , 
+        name : requ.body.name ,
         lastName : requ.body.lastName,
         biographie : requ.body.biographie
     })
@@ -91,13 +93,41 @@ exports.updateProfilInfo = (requ,resp,next)=>{
     })
 }
 
-exports.updateProfilAvatar = (requ,resp,next)=>{
-    // User.updateOne({_id : requ.body.userId},{
-    //     _id : requ.body.userId,
-    //     proflimage : requ.file.filename
-    // })
+exports.deleteAvatars = (requ,resp,next)=>{
 
-    console.log(requ.body)
+    User.findOne({ _id : requ.body.userId})
+    .then(use =>{
+        fs.unlink(pathAvatars.replace('//','/') + use.proflimage,(err)=>{
+            resp.status(500).json({status:false,err})
+        })
+        next()
+    })
+    .catch(err=>{
+        resp.status(500).json({status:false,err})
+    })
+    
+}
+exports.updateProfilAvatar = (requ,resp,next)=>{
+    
+    if(requ.body.imgName){
+        
+        User.updateOne({_id : requ.body.userId},{
+            proflimage : requ.body.imgName
+        })
+        .then(success=>{
+            if(success){
+                resp.status(200).json({status:true,success : "Photo enregistree avec succes"})
+            }else{
+                resp.status(200).json({status:false,err : "Votre image n'a pas pu etre enregistree"})
+            }
+        })
+        .catch(err=>{
+            resp.status(500).json({status:false,err : err})
+        })
+    }else{
+        resp.status(200).json({status:false,error : "Veillez choisir une image svp"})
+    }
+
 }
 
 exports.updateEmail = (requ,resp,next)=>{
