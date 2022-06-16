@@ -35,11 +35,11 @@ paths:
       parameters:
         - name: email
           description: email de l'utilisateur
-          in: body
+          in: formData
           required: true
         - name: password
           description: Mot de passe de l'utilisateur
-          in: body
+          in: formData
           required: true
         
   /user/singnin:
@@ -70,25 +70,25 @@ paths:
       parameters:
         - name: name
           description: Nom
-          in: body
+          in: formData
           required: true
         - name: lastName
-          in: body
+          in: formData
           required: true
         - name: email
-          in: body
+          in: formData
           required: true
         - name: age
-          in: body
+          in: formData
           required: true
         - name: pays
-          in: body
+          in: formData
           required: true
         - name: adresse
-          in: body
+          in: formData
           required: true
         - name: sexe
-          in: body
+          in: formData
           required: true
   /user/getuser:
       post:
@@ -115,11 +115,11 @@ paths:
         parameters:
           - name: userId
             description: Identifiant de l'utilisateur
-            in: body
+            in: formData
             required: true
           - name: token
             description: Token d'acces
-            in: body
+            in: header
             required: true
     
   /user/updateprofil/info:
@@ -147,21 +147,21 @@ paths:
         parameters:
           - name: userId
             description: Identifiant de l'utilisateur
-            in: body
+            in: formData
             required: true
           - name: token
             description: Token d'acces
-            in: body
+            in: header
             required: true
           - name: name
             description: Nom
-            in: body
+            in: formData
             required: true
           - name: lastName
-            in: body
+            in: formData
             required: true
           - name: biographie
-            in: body
+            in: formData
             required: true
 
   /user/updateprofil/avatar:
@@ -183,14 +183,15 @@ paths:
         parameters:
           - name: userId
             description: Identifiant de l'utilisateur
-            in: body
+            in: formData
             required: true
           - name: token
             description: Token d'acces
-            in: body
+            in: header
             required: true
           - name: image
-            in: body
+            in: formData
+            type: file
             required: true
 
   /user/updateprofil/email:
@@ -212,18 +213,18 @@ paths:
         parameters:
           - name: userId
             description: Identifiant de l'utilisateur
-            in: body
+            in: formData
             required: true
-          - name: token
+          - name: header
             description: Token d'acces
-            in: body
+            in: formData
             required: true
           - name: email
-            in: body
+            in: formData
             required: true
           - name: otpcode
             description: code d'authentification
-            in: body
+            in: formData
             required: true
 
   /user/otpcode:
@@ -245,10 +246,10 @@ paths:
         parameters:
           - name: userId
             description: Identifiant de l'utilisateur
-            in: body
+            in: formData
             required: true
           - name: token
             description: Token d'acces
-            in: body
+            in: formData
             required: true
           
