@@ -15,18 +15,6 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     storageBucket : BUCKET
 });
-// const bucket = admin.storage().bucket()
-// exports.uploadAvatars = (requ,resp,next)=>{
-
-//     if(requ.files){
-//         const name = requ.files.originalname.split(' ').join('_').replace(`${'.'+ MINE_TYPES[file.mimetype]}`,'')
-//         const extension = MINE_TYPES[requ.files.mimetype]
-//         const finalName = name + Date.now() + '.' + extension
-//         const avatarsName = bucket.file(finalName)
-//         requ.body.imgName = BUCKET/finalName
-        
-//     }
-// }
 
 const storage = multer.diskStorage({
     destination : (requ,file,callback)=>{
