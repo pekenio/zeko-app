@@ -19,7 +19,7 @@ exports.singnin = (requ, resp, next) => {
         pays: requ.body.pays,
         sexe: requ.body.sexe,
         password: requ.body.password,
-        profimage: "",
+        profimage: "default_image.png",
         pseudo: "",
         auth: 0,
         biographie: "",
