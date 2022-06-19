@@ -162,14 +162,19 @@ exports.deleteAvatars = (requ, resp, next) => {
   if (requ.body.imgName) {
     User.findOne({ _id: requ.body.userId })
       .then((use) => {
-        fs.unlink(pathAvatars.replace("//", "/") + use.proflimage, (err) => {
-          if (err) {
-            resp.status(200).json({ status: false, err });
+        if(use.proflimage !== ''){
+            fs.unlink(pathAvatars.replace("//", "/") + use.proflimage, (err) => {
+            if (err) {
+                resp.status(200).json({ status: false, err });
+                next()
+            } else {
+                next()
+            }
+            })
+        }else{
             next()
-          } else {
-            next();
-          }
-        });
+        }
+        
       })
       .catch((err) => {
         next()
