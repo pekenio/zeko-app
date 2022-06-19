@@ -351,7 +351,12 @@ exports.updateAuth = (requ,resp,next) => {
     }
   )
   .then(success => {
-    resp.status(200).json({ status: false, success: success });
+    if(success.matchedCount > 0){
+      resp.status(200).json({ status: true, success: 'Modification effectuee' });
+    }else{
+      resp.status(200).json({ status: false, err: "Une erreur est survenue" });
+    }
+    
   })
   .catch((err) => {
     resp.status(500).json({ status: false, err });
