@@ -10,7 +10,7 @@ const randomstring = require("randomstring");
 exports.singnin = (requ, resp, next) => {
   User.findOne({ email: requ.body.email }).then((user) => {
     if (user) {
-      resp.status(200).json({ error: "utilisateur existe deja" });
+      resp.status(200).json({status: false, error: "utilisateur existe deja" });
     } else {
         bcrypt.hash(requ.body.password,10)
         .then(hash=>{
@@ -207,10 +207,10 @@ exports.updatePseudo = (requ, resp, next) => {
 }
 
 exports.deleteAvatars = (requ, resp, next) => {
-  if (requ.body.imgName) {
+  if (requ.body.imgName !== undefined && requ.body.imgName !=='') {
     User.findOne({ _id: requ.body.userId })
       .then((use) => {
-        if(use.proflimage !== ''){
+        if(use.proflimage !== '' && use.proflimage !== undefined){
             fs.unlink(pathAvatars.replace("//", "/") + use.proflimage, (err) => {
             if (err) {
                 resp.status(200).json({ status: false, err });
@@ -334,7 +334,7 @@ exports.updateOtpcode = (requ, resp, next) => {
       otpcode: token,
     }
   )
-    .then((success) => {
+    .then(success => {
       next()
     })
     .catch((err) => {
@@ -342,6 +342,21 @@ exports.updateOtpcode = (requ, resp, next) => {
     });
 };
 
+exports.updateAuth = (requ,resp,next) => {
+  User.updateOne(
+    { _id: requ.body.userId },
+    {
+      _id: requ.body.userId,
+      auth: requ.body.auth,
+    }
+  )
+  .then(success => {
+    resp.status(200).json({ status: false, success: success });
+  })
+  .catch((err) => {
+    resp.status(500).json({ status: false, err });
+  });
+}
 exports.sendOtpCode = (requ, resp, next) => {
   User.findOne({ _id: requ.body.userId })
     .then((result) => {

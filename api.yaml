@@ -98,7 +98,7 @@ paths:
             in: header
             required: true
     
-  /user/updateprofil/info:
+  /user/settings/updateprofil/info:
       put:
         summary: Mettre a jour le profil d'un utilisateur
         produces:
@@ -130,7 +130,7 @@ paths:
             type: file
             required: false
 
-  /user/updateprofil/email:
+  /user/settings/updateprofil/email:
       put:
         summary: Modifier l'email d'un utilisateur
         produces:
@@ -155,7 +155,7 @@ paths:
             in: formData
             required: true
 
-  /updateprofil/findpseudo:
+  /user/settings/updateprofil/findpseudo:
       post:
         summary: Verifier la disponibilite d'un pseudo
         produces:
@@ -176,7 +176,7 @@ paths:
             description: Token d'acces
             in: header
             required: true
-  /updateprofil/newpseudo:
+  /user/settings/updateprofil/newpseudo:
       put:
         summary: Sauvegarder un pseudo valide pseudo
         produces:
@@ -197,7 +197,7 @@ paths:
             description: Token d'acces
             in: header
             required: true
-  /updateprofil/newpassword:
+  /user/settings/updateprofil/newpassword:
       put:
         summary: Modifier le mot de passe d'un utilisateur
         produces:
@@ -223,7 +223,7 @@ paths:
             in: header
             required: true
 
-  /user/otpcode:
+  /user/settings/sendotpcode:
       put:
         summary: Envoyer un code d'authentification
         produces:
@@ -235,6 +235,29 @@ paths:
           - name: userId
             description: Identifiant de l'utilisateur
             in: formData
+            required: true
+          - name: token
+            description: Token d'acces
+            in: formData
+            required: true
+  /user/settings/updateAuth:
+      put:
+        summary: Activer ou desactiver l'authentification a deux etapes
+        produces:
+          - application/x-www-form-urlencoded
+        consumes:
+          - application/x-www-form-urlencoded
+        description: retourne une reponse 
+        parameters:
+          - name: userId
+            description: Identifiant de l'utilisateur
+            in: formData
+            required: true
+          - name: auth
+            description: Auth (1 pour activer et 0 pour desactiver)
+            in: formData
+            type: integer
+            enum: [0,1]
             required: true
           - name: token
             description: Token d'acces
