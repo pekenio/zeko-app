@@ -197,6 +197,31 @@ paths:
             description: Token d'acces
             in: header
             required: true
+  /updateprofil/newpassword:
+      put:
+        summary: Modifier le mot de passe d'un utilisateur
+        produces:
+          - application/x-www-form-urlencoded
+        consumes:
+          - application/x-www-form-urlencoded
+        description: Retourne une chaine de caractere
+        parameters:
+          - name: userId
+            description: Identifiant de l'utilisateur
+            in: formData
+            required: true
+          - name: lastPassword
+            description: Ancien mot de passe
+            in: formData
+            required: true
+          - name: newPassword
+            description: Nouveau mot de passe
+            in: formData
+            required: true
+          - name: token
+            description: Token d'acces
+            in: header
+            required: true
 
   /user/otpcode:
       put:

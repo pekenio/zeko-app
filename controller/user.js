@@ -2,6 +2,7 @@ const User = require("../models/user");
 const mailer = require("../config/email");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
+const bcrypt = require('bcrypt')
 const pathAvatars = "./assets/avatars/";
 const randomstring = require("randomstring");
 
@@ -11,62 +12,75 @@ exports.singnin = (requ, resp, next) => {
     if (user) {
       resp.status(200).json({ error: "utilisateur existe deja" });
     } else {
-      const Newuser = new User({
-        name: requ.body.name,
-        lastName: requ.body.lastName,
-        email: requ.body.email,
-        age: requ.body.age,
-        adresse: requ.body.adresse,
-        pays: requ.body.pays,
-        sexe: requ.body.sexe,
-        password: requ.body.password,
-        profimage: "default_image.png",
-        pseudo: "",
-        auth: 0,
-        biographie: "",
+        bcrypt.hash(requ.body.password,10)
+        .then(hash=>{
+          
+          const Newuser = new User({
+            name: requ.body.name,
+            lastName: requ.body.lastName,
+            email: requ.body.email,
+            age: requ.body.age,
+            adresse: requ.body.adresse,
+            pays: requ.body.pays,
+            sexe: requ.body.sexe,
+            password: hash,
+            profimage: "",
+            pseudo: "",
+            auth: 0,
+            biographie: "",
+          });
+
+          Newuser.save()
+            .then((success) => {
+              if (success) {
+                resp.status(201).json({status: true, success: "Utilisateur cree avec succes" });
+              }
+            })
+            .catch((err) => {
+              resp.status(400).json({status: false, err: err });
+            });
+      })
+      .catch((err) => {
+        resp.status(500).json({status: false, err: err });
       });
-      Newuser.save()
-        .then((success) => {
-          if (success) {
-            resp.status(201).json({ success: "Utilisateur cree avec succes" });
-          }
-        })
-        .catch((err) => {
-          resp.status(400).json({ err: err });
-        });
+      
     }
   });
 };
 
 exports.login = (requ, resp, next) => {
   User.findOne({ email: requ.body.email })
-    .then((result) => {
+    .then(result => {
       if (result) {
-        if (result.password === requ.body.password) {
-          const accestoken = jwt.sign({ userId: result._id }, "pekenio2022", {
-            expiresIn: "360h",
-          });
-          resp
-            .status(200)
-            .json({
-              status: true,
-              accesID: result._id,
-              AuthCode: accestoken,
-              nom: result.name,
-              prenom: result.lastName,
-              age: result.age,
-              biographie: result.biographie,
-              email: result.email,
-              sexe: result.sexe,
-              adresse: result.adresse,
-              pays: result.pays,
-              pseudo: result.pseudo,
+        bcrypt.compare(requ.body.password,result.password)
+        .then(valide =>{
+          if(valide){
+            const accestoken = jwt.sign({ userId: result._id }, "pekenio2022", {
+              expiresIn: "360h",
             });
-        } else {
-          resp
+            resp
+              .status(200)
+              .json({
+                status: true,
+                accesID: result._id,
+                AuthCode: accestoken,
+                nom: result.name,
+                prenom: result.lastName,
+                age: result.age,
+                biographie: result.biographie,
+                email: result.email,
+                sexe: result.sexe,
+                adresse: result.adresse,
+                pays: result.pays,
+                pseudo: result.pseudo,
+              });
+          }else{
+            resp
             .status(200)
             .json({ status: false, err: "Le mot de passe est incorrect" });
-        }
+          }
+        })
+        
       } else {
         resp.status(200).json({ status: false, err: "Utilisateur non trouve" });
       }
@@ -119,12 +133,12 @@ exports.updateProfilInfo = (requ, resp, next) => {
             .status(200)
             .json({
               status: true,
-              success: "Votre modification a ete une reussite",
+              success: "Votre modification a ete effectuee avec succes",
             });
         } else {
           resp
             .status(200)
-            .json({ status: false, error: "Une erreur est survenue" });
+            .json({ status: false, err: "Une erreur est survenue" });
         }
       })
       .catch((err) => {
@@ -146,12 +160,12 @@ exports.updateProfilInfo = (requ, resp, next) => {
             .status(200)
             .json({
               status: true,
-              success: "Votre modification a ete une reussite",
+              success: "Votre modification a ete effectuee avec succes",
             });
         } else {
           resp
             .status(200)
-            .json({ status: false, error: "Une erreur est survenue" });
+            .json({ status: false, err: "Une erreur est survenue" });
         }
       })
       .catch((err) => {
@@ -216,38 +230,41 @@ exports.deleteAvatars = (requ, resp, next) => {
   } else {
     next();
   }
-};
-exports.updateProfilAvatar = (requ, resp, next) => {
-  if (requ.body.imgName) {
-    User.updateOne(
-      { _id: requ.body.userId },
-      {
-        proflimage: requ.body.imgName,
-      }
-    )
-      .then((success) => {
-        if (success) {
-          resp
-            .status(200)
-            .json({ status: true, success: "Photo enregistree avec succes" });
-        } else {
-          resp
-            .status(200)
-            .json({
-              status: false,
-              err: "Votre image n'a pas pu etre enregistree",
-            });
-        }
-      })
-      .catch((err) => {
-        resp.status(500).json({ status: false, err: err });
-      });
-  } else {
-    resp
-      .status(200)
-      .json({ status: false, error: "Veillez choisir une image svp" });
-  }
-};
+}
+
+/**En cas d'unique modification */
+
+// exports.updateProfilAvatar = (requ, resp, next) => {
+//   if (requ.body.imgName) {
+//     User.updateOne(
+//       { _id: requ.body.userId },
+//       {
+//         proflimage: requ.body.imgName,
+//       }
+//     )
+//       .then((success) => {
+//         if (success) {
+//           resp
+//             .status(200)
+//             .json({ status: true, success: "Photo enregistree avec succes" });
+//         } else {
+//           resp
+//             .status(200)
+//             .json({
+//               status: false,
+//               err: "Votre image n'a pas pu etre enregistree",
+//             });
+//         }
+//       })
+//       .catch((err) => {
+//         resp.status(500).json({ status: false, err: err });
+//       });
+//   } else {
+//     resp
+//       .status(200)
+//       .json({ status: false, err: "Veillez choisir une image svp" });
+//   }
+// };
 
 exports.updateEmail = (requ, resp, next) => {
   User.updateOne(
@@ -260,15 +277,50 @@ exports.updateEmail = (requ, resp, next) => {
     .where({ otpcode: requ.body.otpcode })
     .then((success) => {
       if (success.matchedCount > 0) {
-        next();
+        resp.status(200).json({ status: true, success: "Votre adresse email a ete modifiee avec succes" });
+        next()
       } else {
-        resp.status(200).json({ status: false, error: "Code incorrect" });
+        resp.status(200).json({ status: false, err: "Code incorrect" });
       }
     })
     .catch((err) => {
       resp.status(500).json({ status: false, err });
     });
-};
+}
+
+exports.updatePassword = (reau,resp,next) =>{
+  User.findOne({ _id: requ.body.userId })
+    .then((result) => {
+      if (result) {
+        bcrypt.compare(requ.body.lastPassword,result.password)
+        .then(valide =>{
+          if(valide){
+            bcrypt.hash(requ.body.newPassword,10)
+            .then(hash =>{
+              User.updateOne({_id : requ.body.userId},{
+                _id : requ.body.userId,
+                password : hash
+              })
+            })
+          }else{
+            resp
+            .status(200)
+            .json({ status: false, err: "Le mot de passe est incorrect" });
+          }
+
+        })
+        .catch((err) => {
+          resp.status(500).json({ status: false, err });
+        });
+        
+      } else {
+        resp.status(200).json({ status: false, err: "Utilisateur non trouve" });
+      }
+    })
+    .catch((err) => {
+      resp.status(500).json({ status: false, err });
+    });
+}
 
 exports.updateOtpcode = (requ, resp, next) => {
   const token = randomstring.generate({
@@ -283,7 +335,7 @@ exports.updateOtpcode = (requ, resp, next) => {
     }
   )
     .then((success) => {
-      next();
+      next()
     })
     .catch((err) => {
       resp.status(500).json({ status: false, err });
