@@ -11,5 +11,7 @@ route.post('/getuser/',userAuth.authentification,userControll.getUser)
 route.put('/updateprofil/info/',userAuth.authentification,multer,userControll.deleteAvatars,userControll.updateProfilInfo)
 route.put('/updateprofil/email/',userAuth.authentification,userControll.updateEmail,userControll.updateOtpcode)
 route.post('/otpcode/',userAuth.authentification,userControll.updateOtpcode,userControll.sendOtpCode)
+route.post('/updateprofil/findpseudo',userAuth.authentification,userControll.findPseudo)
+route.post('/updateprofil/newpseudo',userAuth.authentification,userControll.updatePseudo)
 
 module.exports = route

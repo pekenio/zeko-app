@@ -24,14 +24,6 @@ paths:
         - text/plain; charset=utf-8
         - multipart/form-data
       description: Retourne un token d'authentification et un identifiant
-      responses:
-        status:
-          false:
-            description: Utilisateur non trouve
-          true:
-            description: Utilisateur authentifie
-        500:
-          description: Erreur du serveur
       parameters:
         - name: email
           description: email de l'utilisateur
@@ -56,17 +48,6 @@ paths:
           - text/plain; charset=utf-8
           - multipart/form-data
         description: Creer un nouvel utilisateur
-        responses:
-          status:
-            false:
-              description: Utilisateur existe deja
-              schema:
-                type: string
-                exemple: Utilisateur non trouve
-            true:
-              description: Utilisateur authentifie
-          500:
-            description: Erreur du serveur
       parameters:
         - name: name
           description: Nom
@@ -107,14 +88,6 @@ paths:
           - text/plain; charset=utf-8
           - multipart/form-data
         description: Retourne une liste de donnees en JSON
-        responses:
-          status:
-            false:
-              description: Utilisateur non trouve
-            true:
-              description: Utilisateur authentifie
-          500:
-            description: Erreur du serveur
         parameters:
           - name: userId
             description: Identifiant de l'utilisateur
@@ -133,14 +106,6 @@ paths:
         consumes:
           - multipart/form-data
         description: retourne une reponse 
-        responses:
-          status:
-            false:
-              description: Une erreur est survenue
-            true:
-              description: Votre modification a ete une reussite
-          500:
-            description: Erreur du serveur
         parameters:
           - name: userId
             description: Identifiant de l'utilisateur
@@ -173,14 +138,6 @@ paths:
         consumes:
           - application/x-www-form-urlencoded
         description: retourne une reponse 
-        responses:
-          status:
-            false:
-              description: Une erreur est survenue
-            true:
-              description: Votre modification a ete une reussite
-          500:
-            description: Erreur du serveur
         parameters:
           - name: userId
             description: Identifiant de l'utilisateur
@@ -198,6 +155,49 @@ paths:
             in: formData
             required: true
 
+  /updateprofil/findpseudo:
+      post:
+        summary: Verifier la disponibilite d'un pseudo
+        produces:
+          - application/x-www-form-urlencoded
+        consumes:
+          - application/x-www-form-urlencoded
+        description: Retourne une chaine de caractere
+        parameters:
+          - name: userId
+            description: Identifiant de l'utilisateur
+            in: formData
+            required: true
+          - name: pseudo
+            description: Pseudo choisi
+            in: formData
+            required: true
+          - name: token
+            description: Token d'acces
+            in: header
+            required: true
+  /updateprofil/newpseudo:
+      put:
+        summary: Sauvegarder un pseudo valide pseudo
+        produces:
+          - application/x-www-form-urlencoded
+        consumes:
+          - application/x-www-form-urlencoded
+        description: Retourne une chaine de caractere
+        parameters:
+          - name: userId
+            description: Identifiant de l'utilisateur
+            in: formData
+            required: true
+          - name: pseudo
+            description: Pseudo choisi
+            in: formData
+            required: true
+          - name: token
+            description: Token d'acces
+            in: header
+            required: true
+
   /user/otpcode:
       put:
         summary: Envoyer un code d'authentification
@@ -206,14 +206,6 @@ paths:
         consumes:
           - application/x-www-form-urlencoded
         description: retourne une reponse 
-        responses:
-          status:
-            false:
-              description: Une erreur est survenue
-            true:
-              description: Code envoye avec succes
-          500:
-            description: Erreur du serveur
         parameters:
           - name: userId
             description: Identifiant de l'utilisateur

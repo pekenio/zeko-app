@@ -5,6 +5,7 @@ const fs = require("fs");
 const pathAvatars = "./assets/avatars/";
 const randomstring = require("randomstring");
 
+
 exports.singnin = (requ, resp, next) => {
   User.findOne({ email: requ.body.email }).then((user) => {
     if (user) {
@@ -27,7 +28,7 @@ exports.singnin = (requ, resp, next) => {
       Newuser.save()
         .then((success) => {
           if (success) {
-            resp.status(201).json({ cree: "Utilisateur cree avec succes" });
+            resp.status(201).json({ success: "Utilisateur cree avec succes" });
           }
         })
         .catch((err) => {
@@ -92,6 +93,7 @@ exports.getUser = (requ, resp, next) => {
           adresse: response.adresse,
           pays: response.pays,
           pseudo: response.pseudo,
+          avatar:'http://localhost:3000/user/avatars/'+response.proflimage
         });
     })
     .catch((err) => {
@@ -157,6 +159,38 @@ exports.updateProfilInfo = (requ, resp, next) => {
       });
   }
 };
+exports.findPseudo = (requ,resp,next) =>{
+    User.findOne({ pseudo: requ.body.pseudo })
+    .then((use) => {
+        if(use){
+            if(use._id == requ.body.userId){
+                resp.status(200).json({ status: true, err: 'Ce pseudo vous appartient deja' });
+            }else{
+                resp.status(200).json({ status: true, err: 'Ce pseudo est deja pris' });
+            }
+            
+        }else{
+            resp.status(200).json({ status: true,success: 'Pseudo disponible' })
+        }
+        
+    })
+    .catch((err) => {
+        resp.status(500).json({ err });
+    });
+}
+exports.updatePseudo = (requ, resp, next) => {
+    User.updateOne(
+        { _id: requ.body.userId },
+        {
+          _id: requ.body.userId,
+          pseudo:requ.body.pseudo
+        }
+    )
+    .then(resp.status(200).json({ status: true, success: 'Votre pseudo a bien été enregistré' }))
+    .catch((err) => {
+        resp.status(200).json({ status: false, err });
+    })
+}
 
 exports.deleteAvatars = (requ, resp, next) => {
   if (requ.body.imgName) {
