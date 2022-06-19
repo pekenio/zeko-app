@@ -33,22 +33,93 @@ paths:
           description: Mot de passe de l'utilisateur
           in: formData
           required: true
+      reponses:
+        200:
+          description: ok
+        500:
+          description: err
         
   /user/singnin:
-      put:
-        summary: Inscription de l'utilisateur
-        produces:
-          - application/x-www-form-urlencoded
-          - text/html
-          - text/plain; charset=utf-8
-          - multipart/form-data
-        consumes:
-          - application/x-www-form-urlencoded
-          - text/html
-          - text/plain; charset=utf-8
-          - multipart/form-data
-        description: Creer un nouvel utilisateur
+    put:
+      summary: Inscription de l'utilisateur
+      produces:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      consumes:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      description: Creer un nouvel utilisateur
+    parameters:
+      - name: name
+        description: Nom
+        in: formData
+        required: true
+      - name: lastName
+        in: formData
+        required: true
+      - name: email
+        in: formData
+        required: true
+      - name: password
+        in: formData
+        required: true
+      - name: age
+        in: formData
+        required: true
+      - name: pays
+        in: formData
+        required: true
+      - name: adresse
+        in: formData
+        required: true
+      - name: sexe
+        in: formData
+        required: true
+  /user/getuser:
+    post:
+      summary: Recuperer les informations d'un utilisateur
+      produces:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      consumes:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      description: Retourne une liste de donnees en JSON
       parameters:
+        - name: userId
+          description: Identifiant de l'utilisateur
+          in: formData
+          required: true
+        - name: token
+          description: Token d'acces
+          in: header
+          required: true
+    
+  /user/settings/updateprofil/info:
+    put:
+      summary: Mettre a jour le profil d'un utilisateur
+      produces:
+        - multipart/form-data
+      consumes:
+        - multipart/form-data
+      description: retourne une reponse 
+      parameters:
+        - name: userId
+          description: Identifiant de l'utilisateur
+          in: formData
+          required: true
+        - name: token
+          description: Token d'acces
+          in: header
+          required: true
         - name: name
           description: Nom
           in: formData
@@ -56,211 +127,175 @@ paths:
         - name: lastName
           in: formData
           required: true
+        - name: biographie
+          in: formData
+          required: true
+        - name: image
+          in: formData
+          type: file
+          required: false
+
+  /user/settings/updateprofil/email:
+    put:
+      summary: Modifier l'email d'un utilisateur
+      produces:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      consumes:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      description: retourne une reponse 
+      parameters:
+        - name: userId
+          description: Identifiant de l'utilisateur
+          in: formData
+          required: true
+        - name: header
+          description: Token d'acces
+          in: formData
+          required: true
         - name: email
           in: formData
           required: true
-        - name: password
+        - name: otpcode
+          description: code d'authentification
           in: formData
           required: true
-        - name: age
-          in: formData
-          required: true
-        - name: pays
-          in: formData
-          required: true
-        - name: adresse
-          in: formData
-          required: true
-        - name: sexe
-          in: formData
-          required: true
-  /user/getuser:
-      post:
-        summary: Recuperer les informations d'un utilisateur
-        produces:
-          - application/x-www-form-urlencoded
-          - text/html
-          - text/plain; charset=utf-8
-          - multipart/form-data
-        consumes:
-          - application/x-www-form-urlencoded
-          - text/html
-          - text/plain; charset=utf-8
-          - multipart/form-data
-        description: Retourne une liste de donnees en JSON
-        parameters:
-          - name: userId
-            description: Identifiant de l'utilisateur
-            in: formData
-            required: true
-          - name: token
-            description: Token d'acces
-            in: header
-            required: true
-    
-  /user/settings/updateprofil/info:
-      put:
-        summary: Mettre a jour le profil d'un utilisateur
-        produces:
-          - multipart/form-data
-        consumes:
-          - multipart/form-data
-        description: retourne une reponse 
-        parameters:
-          - name: userId
-            description: Identifiant de l'utilisateur
-            in: formData
-            required: true
-          - name: token
-            description: Token d'acces
-            in: header
-            required: true
-          - name: name
-            description: Nom
-            in: formData
-            required: true
-          - name: lastName
-            in: formData
-            required: true
-          - name: biographie
-            in: formData
-            required: true
-          - name: image
-            in: formData
-            type: file
-            required: false
-
-  /user/settings/updateprofil/email:
-      put:
-        summary: Modifier l'email d'un utilisateur
-        produces:
-          - application/x-www-form-urlencoded
-        consumes:
-          - application/x-www-form-urlencoded
-        description: retourne une reponse 
-        parameters:
-          - name: userId
-            description: Identifiant de l'utilisateur
-            in: formData
-            required: true
-          - name: header
-            description: Token d'acces
-            in: formData
-            required: true
-          - name: email
-            in: formData
-            required: true
-          - name: otpcode
-            description: code d'authentification
-            in: formData
-            required: true
 
   /user/settings/updateprofil/findpseudo:
-      post:
-        summary: Verifier la disponibilite d'un pseudo
-        produces:
-          - application/x-www-form-urlencoded
-        consumes:
-          - application/x-www-form-urlencoded
-        description: Retourne une chaine de caractere
-        parameters:
-          - name: userId
-            description: Identifiant de l'utilisateur
-            in: formData
-            required: true
-          - name: pseudo
-            description: Pseudo choisi
-            in: formData
-            required: true
-          - name: token
-            description: Token d'acces
-            in: header
-            required: true
+    post:
+      summary: Verifier la disponibilite d'un pseudo
+      produces:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      consumes:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      description: Retourne une chaine de caractere
+      parameters:
+        - name: userId
+          description: Identifiant de l'utilisateur
+          in: formData
+          required: true
+        - name: pseudo
+          description: Pseudo choisi
+          in: formData
+          required: true
+        - name: token
+          description: Token d'acces
+          in: header
+          required: true
   /user/settings/updateprofil/newpseudo:
-      put:
-        summary: Sauvegarder un pseudo valide pseudo
-        produces:
-          - application/x-www-form-urlencoded
-        consumes:
-          - application/x-www-form-urlencoded
-        description: Retourne une chaine de caractere
-        parameters:
-          - name: userId
-            description: Identifiant de l'utilisateur
-            in: formData
-            required: true
-          - name: pseudo
-            description: Pseudo choisi
-            in: formData
-            required: true
-          - name: token
-            description: Token d'acces
-            in: header
-            required: true
+    put:
+      summary: Sauvegarder un pseudo valide pseudo
+      produces:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      consumes:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      description: Retourne une chaine de caractere
+      parameters:
+        - name: userId
+          description: Identifiant de l'utilisateur
+          in: formData
+          required: true
+        - name: pseudo
+          description: Pseudo choisi
+          in: formData
+          required: true
+        - name: token
+          description: Token d'acces
+          in: header
+          required: true
   /user/settings/updateprofil/newpassword:
-      put:
-        summary: Modifier le mot de passe d'un utilisateur
-        produces:
-          - application/x-www-form-urlencoded
-        consumes:
-          - application/x-www-form-urlencoded
-        description: Retourne une chaine de caractere
-        parameters:
-          - name: userId
-            description: Identifiant de l'utilisateur
-            in: formData
-            required: true
-          - name: lastPassword
-            description: Ancien mot de passe
-            in: formData
-            required: true
-          - name: newPassword
-            description: Nouveau mot de passe
-            in: formData
-            required: true
-          - name: token
-            description: Token d'acces
-            in: header
-            required: true
+    put:
+      summary: Modifier le mot de passe d'un utilisateur
+      produces:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      consumes:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      description: Retourne une chaine de caractere
+      parameters:
+        - name: userId
+          description: Identifiant de l'utilisateur
+          in: formData
+          required: true
+        - name: lastPassword
+          description: Ancien mot de passe
+          in: formData
+          required: true
+        - name: newPassword
+          description: Nouveau mot de passe
+          in: formData
+          required: true
+        - name: token
+          description: Token d'acces
+          in: header
+          required: true
 
   /user/settings/sendotpcode:
-      put:
-        summary: Envoyer un code d'authentification
-        produces:
-          - application/x-www-form-urlencoded
-        consumes:
-          - application/x-www-form-urlencoded
-        description: retourne une reponse 
-        parameters:
-          - name: userId
-            description: Identifiant de l'utilisateur
-            in: formData
-            required: true
-          - name: token
-            description: Token d'acces
-            in: formData
-            required: true
+    put:
+      summary: Envoyer un code d'authentification
+      produces:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      consumes:
+        - application/x-www-form-urlencoded
+        - text/html
+        - text/plain; charset=utf-8
+        - multipart/form-data
+      description: retourne une reponse 
+      parameters:
+        - name: userId
+          description: Identifiant de l'utilisateur
+          in: formData
+          required: true
+        - name: token
+          description: Token d'acces
+          in: formData
+          required: true
   /user/settings/updateAuth:
-      put:
-        summary: Activer ou desactiver l'authentification a deux etapes
-        produces:
-          - application/x-www-form-urlencoded
-        consumes:
-          - application/x-www-form-urlencoded
-        description: retourne une reponse 
-        parameters:
-          - name: userId
-            description: Identifiant de l'utilisateur
-            in: formData
-            required: true
-          - name: auth
-            description: Auth (1 pour activer et 0 pour desactiver)
-            in: formData
-            type: integer
-            enum: [0,1]
-            required: true
-          - name: token
-            description: Token d'acces
-            in: formData
-            required: true
+    put:
+      summary: Activer ou desactiver l'authentification a deux etapes
+      produces:
+        - application/x-www-form-urlencoded
+      consumes:
+        - application/x-www-form-urlencoded
+      description: retourne une reponse 
+      parameters:
+        - name: userId
+          description: Identifiant de l'utilisateur
+          in: formData
+          required: true
+        - name: auth
+          description: Auth (1 pour activer et 0 pour desactiver)
+          in: formData
+          type: integer
+          enum: [0,1]
+          required: true
+        - name: token
+          description: Token d'acces
+          in: formData
+          required: true
           
