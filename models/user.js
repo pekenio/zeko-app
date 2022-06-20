@@ -6,7 +6,7 @@ const User = mongoose.Schema({
     email : {type : String , required : true , unique:true},
     age : {type : Number , required : true},
     adresse : {type : String , required : false},
-    pays : {type : String , required : false},
+    pays : {type : String , required : true},
     sexe : {type : String , required : false},
     password : {type : String , required : true},
     proflimage : {type : String , required : false},

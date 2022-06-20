@@ -19,6 +19,7 @@ exports.singnin = (requ, resp, next) => {
             name: requ.body.name,
             email: requ.body.email,
             age: requ.body.age,
+            pays: requ.body.pays,
             adresse: '',
             sexe: '',
             password: hash,

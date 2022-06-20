@@ -56,6 +56,10 @@ paths:
         description: Adresse email
         in: formData
         required: true
+      - name: Pays
+        description: Pays de residence
+        in: formData
+        required: true
       - name: age
         description: Age
         type: integer
