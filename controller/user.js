@@ -17,15 +17,13 @@ exports.singnin = (requ, resp, next) => {
           
           const Newuser = new User({
             name: requ.body.name,
-            lastName: requ.body.lastName,
             email: requ.body.email,
             age: requ.body.age,
-            adresse: requ.body.adresse,
-            pays: requ.body.pays,
-            sexe: requ.body.sexe,
+            adresse: '',
+            sexe: '',
             password: hash,
-            profimage: "",
-            pseudo: "",
+            profimage: '',
+            pseudo: '',
             auth: 0,
             biographie: "",
           });
@@ -122,7 +120,6 @@ exports.updateProfilInfo = (requ, resp, next) => {
       {
         _id: requ.body.userId,
         name: requ.body.name,
-        lastName: requ.body.lastName,
         biographie: requ.body.biographie,
         proflimage: requ.body.imgName,
       }

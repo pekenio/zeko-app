@@ -52,25 +52,17 @@ paths:
         description: Nom
         in: formData
         required: true
-      - name: lastName
-        in: formData
-        required: true
       - name: email
-        in: formData
-        required: true
-      - name: password
+        description: Adresse email
         in: formData
         required: true
       - name: age
+        description: Age
+        type: integer
         in: formData
         required: true
-      - name: pays
-        in: formData
-        required: true
-      - name: adresse
-        in: formData
-        required: true
-      - name: sexe
+      - name: password
+        description: Mot de passe
         in: formData
         required: true
     responses:
@@ -126,9 +118,6 @@ paths:
           required: true
         - name: name
           description: Nom
-          in: formData
-          required: true
-        - name: lastName
           in: formData
           required: true
         - name: biographie
