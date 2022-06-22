@@ -27,6 +27,10 @@ paths:
           description: Mot de passe de l'utilisateur
           in: formData
           required: true
+        - name: token
+          description: token secret
+          in: header
+          required: true
       responses:
         200:
           description: ok
@@ -56,7 +60,7 @@ paths:
         description: Adresse email
         in: formData
         required: true
-      - name: Pays
+      - name: pays
         description: Pays de residence
         in: formData
         required: true
@@ -68,6 +72,10 @@ paths:
       - name: password
         description: Mot de passe
         in: formData
+        required: true
+      - name: token
+        description: token secret
+        in: header
         required: true
     responses:
         200:
@@ -94,7 +102,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: Token d'acces
+          description: token secret
           in: header
           required: true
       responses:
@@ -116,10 +124,6 @@ paths:
           description: Identifiant de l'utilisateur
           in: formData
           required: true
-        - name: token
-          description: Token d'acces
-          in: header
-          required: true
         - name: name
           description: Nom
           in: formData
@@ -131,6 +135,10 @@ paths:
           in: formData
           type: file
           required: false
+        - name: token
+          description: token secret
+          in: header
+          required: true
       responses:
         200:
           description: ok
@@ -156,16 +164,16 @@ paths:
           description: Identifiant de l'utilisateur
           in: formData
           required: true
-        - name: header
-          description: Token d'acces
-          in: formData
-          required: true
         - name: email
           in: formData
           required: true
         - name: otpcode
           description: code d'authentification
           in: formData
+          required: true
+        - name: token
+          description: token secret
+          in: header
           required: true
       responses:
         200:
@@ -197,7 +205,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: Token d'acces
+          description: token secret
           in: header
           required: true
       responses:
@@ -229,7 +237,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: Token d'acces
+          description: token secret
           in: header
           required: true
       responses:
@@ -265,7 +273,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: Token d'acces
+          description: token secret
           in: header
           required: true
       responses:
@@ -294,7 +302,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: Token d'acces
+          description: token secret
           in: header
           required: true
       responses:
@@ -322,7 +330,7 @@ paths:
           enum: [0,1]
           required: true
         - name: token
-          description: Token d'acces
+          description: token secret
           in: header
           required: true
       responses:
