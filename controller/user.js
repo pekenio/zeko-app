@@ -23,7 +23,7 @@ exports.singnin = (requ, resp, next) => {
             adresse: '',
             sexe: '',
             password: hash,
-            profimage: '',
+            proflimage: '',
             pseudo: '',
             auth: 0,
             biographie: "",
@@ -32,7 +32,7 @@ exports.singnin = (requ, resp, next) => {
           Newuser.save()
             .then((success) => {
               if (success) {
-                resp.status(201).json({status: true, success: "Utilisateur cree avec succes" });
+                resp.status(201).json({status: true, success: "Votre compte a été créé avec succès", userId: success._id});
               }
             })
             .catch((err) => {
@@ -54,15 +54,11 @@ exports.login = (requ, resp, next) => {
         bcrypt.compare(requ.body.password,result.password)
         .then(valide =>{
           if(valide){
-            const accestoken = jwt.sign({ userId: result._id }, "pekenio2022", {
-              expiresIn: "360h",
-            });
             resp
               .status(200)
               .json({
                 status: true,
-                accesID: result._id,
-                AuthCode: accestoken,
+                userId: result._id,
                 nom: result.name,
                 prenom: result.lastName,
                 age: result.age,
@@ -72,6 +68,7 @@ exports.login = (requ, resp, next) => {
                 adresse: result.adresse,
                 pays: result.pays,
                 pseudo: result.pseudo,
+                auth: result.auth,
               });
           }else{
             resp
@@ -81,7 +78,7 @@ exports.login = (requ, resp, next) => {
         })
         
       } else {
-        resp.status(200).json({ status: false, err: "Utilisateur non trouve" });
+        resp.status(200).json({ status: false, err: "Ce compte n'existe pas" });
       }
     })
     .catch((err) => {
@@ -106,6 +103,7 @@ exports.getUser = (requ, resp, next) => {
           adresse: response.adresse,
           pays: response.pays,
           pseudo: response.pseudo,
+          auth: response.auth,
           avatar:'http://localhost:3000/user/avatars/'+response.proflimage
         });
     })
@@ -131,7 +129,7 @@ exports.updateProfilInfo = (requ, resp, next) => {
             .status(200)
             .json({
               status: true,
-              success: "Votre modification a ete effectuee avec succes",
+              success: "Votre modification a été prise en compte",
             });
         } else {
           resp
@@ -158,7 +156,7 @@ exports.updateProfilInfo = (requ, resp, next) => {
             .status(200)
             .json({
               status: true,
-              success: "Votre modification a ete effectuee avec succes",
+              success: "Votre modification a été prise en compte",
             });
         } else {
           resp
@@ -176,9 +174,9 @@ exports.findPseudo = (requ,resp,next) =>{
     .then((use) => {
         if(use){
             if(use._id == requ.body.userId){
-                resp.status(200).json({ status: true, err: 'Ce pseudo vous appartient deja' });
+                resp.status(200).json({ status: true, err: 'Ce pseudo vous appartient déja' });
             }else{
-                resp.status(200).json({ status: true, err: 'Ce pseudo est deja pris' });
+                resp.status(200).json({ status: true, err: 'Ce pseudo est déja utilisé veillez en choisir un autre' });
             }
             
         }else{
@@ -191,17 +189,35 @@ exports.findPseudo = (requ,resp,next) =>{
     });
 }
 exports.updatePseudo = (requ, resp, next) => {
-    User.updateOne(
-        { _id: requ.body.userId },
-        {
-          _id: requ.body.userId,
-          pseudo:requ.body.pseudo
+  User.findOne({ pseudo: requ.body.pseudo })
+    .then((use) => {
+        if(use){
+
+          if(use._id == requ.body.userId){
+            resp.status(200).json({ status: true, err: 'Ce pseudo vous appartient déja' });
+          }else{
+              resp.status(200).json({ status: true, err: 'Ce pseudo est déja utilisé veillez en choisir un autre' });
+          }
+            
+        }else{
+          User.updateOne(
+            { _id: requ.body.userId },
+            {
+              _id: requ.body.userId,
+              pseudo:requ.body.pseudo
+            }
+            )
+            .then(resp.status(200).json({ status: true, success: 'Votre pseudo a bien été enregistré' }))
+            .catch((err) => {
+                resp.status(200).json({ status: false, err });
+          })
         }
-    )
-    .then(resp.status(200).json({ status: true, success: 'Votre pseudo a bien été enregistré' }))
-    .catch((err) => {
-        resp.status(200).json({ status: false, err });
+        
     })
+    .catch((err) => {
+        resp.status(500).json({ err });
+    });
+    
 }
 
 exports.deleteAvatars = (requ, resp, next) => {
@@ -275,10 +291,10 @@ exports.updateEmail = (requ, resp, next) => {
     .where({ otpcode: requ.body.otpcode })
     .then((success) => {
       if (success.matchedCount > 0) {
-        resp.status(200).json({ status: true, success: "Votre adresse email a ete modifiee avec succes" });
+        resp.status(200).json({ status: true, success: "Adresse modifiée avec succes" });
         next()
       } else {
-        resp.status(200).json({ status: false, err: "Code incorrect" });
+        resp.status(200).json({ status: false, err: "Code d'authentification incorrect" });
       }
     })
     .catch((err) => {
@@ -369,7 +385,7 @@ exports.sendOtpCode = (requ, resp, next) => {
           "Code d'authentification",
           "Votre code d'authentification est " + result.otpcode
         );
-        resp.status(200).json({ status: true, success: "Code transfere" });
+        resp.status(200).json({ status: true, success: "Le Code d'authentification a été transfere à votre adresse mail" });
       } else {
         resp
           .status(200)
@@ -381,20 +397,20 @@ exports.sendOtpCode = (requ, resp, next) => {
     });
 };
 
-exports.deleteOtpCode = (requ, resp, next) => {
-  User.updateOne(
-    { _id: requ.body.userId },
-    {
-      _id: requ.body.userId,
-      otpcode: "",
-    }
-  )
-    .then((success) => {
-      if (success.matchedCount > 0) {
-        next();
-      }
-    })
-    .catch((err) => {
-      resp.status(500).json({ status: false, err });
-    });
-};
+// exports.deleteOtpCode = (requ, resp, next) => {
+//   User.updateOne(
+//     { _id: requ.body.userId },
+//     {
+//       _id: requ.body.userId,
+//       otpcode: "",
+//     }
+//   )
+//     .then((success) => {
+//       if (success.matchedCount > 0) {
+//         next();
+//       }
+//     })
+//     .catch((err) => {
+//       resp.status(500).json({ status: false, err });
+//     });
+// };

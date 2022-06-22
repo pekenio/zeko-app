@@ -11,7 +11,7 @@ const swaggerJsdoc = YAML.load('./api.yaml');
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended: true}));
 app.use('/user',express.static(__dirname +'/assets/'));
-mongoose.connect('mongodb+srv://coulibaly:Coulibal7@cluster0.fmdjk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://coulibaly:Coulibal7@cluster0.fmdjk.mongodb.net/zekoApp?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))

@@ -1,18 +1,18 @@
 const jwt = require('jsonwebtoken')
-const User = require('../models/user')
+const Admins = require('../models/admins')
 exports.authentification = (requ,resp,next) => {
     const token = requ.headers.token
-    jwt.verify(token,'pekenio2022',(err,decodeToken) =>{
+    jwt.verify(token,'pioupiou',(err,decodeToken) =>{
         if(err){
-            resp.status(500).json({status:false,err : "Le token d'authentification est ivalide"})
+            resp.status(500).json({status:false,err : "Accès refusé"})
         }else{
-            const id = decodeToken.userId
-            User.findOne({_userId : id})
+            const id = decodeToken.adminId
+            Admins.findOne({_userId : id})
             .then(sucees =>{
                 if(sucees){
                     next()
                 }else{
-                    resp.status(200).json({status:false,err : "Utilisateur non inconnu"})
+                    resp.status(200).json({status:false,err : "Accès refusé"})
                 }
             })
             .catch(err =>{
