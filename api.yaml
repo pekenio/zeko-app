@@ -2,7 +2,7 @@ swagger: '2.0'
 info: 
   title: Zeko-app API
   version: 1.0.0
-  description: Documentaton de l'api Zeko-app
+  description: Documentation de l'api Zeko-app
   contact:
     email: azizcoulibaly009@gmail.com
   servers:
