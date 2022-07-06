@@ -4,7 +4,9 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const bcrypt = require('bcrypt')
 const pathAvatars = "./assets/avatars/";
+const Promotion = require('../models/promotion')
 const randomstring = require("randomstring");
+const { response } = require("express");
 
 
 exports.singnin = (requ, resp, next) => {
@@ -12,6 +14,11 @@ exports.singnin = (requ, resp, next) => {
     if (user) {
       resp.status(200).json({status: false, error: "utilisateur existe deja" });
     } else {
+        const codePromo = randomstring.generate({
+          length: 5,
+          charset: "alphanumeric",
+          capitalization: "uppercase"
+        });
         bcrypt.hash(requ.body.password,10)
         .then(hash=>{
           
@@ -26,6 +33,8 @@ exports.singnin = (requ, resp, next) => {
             proflimage: '',
             pseudo: '',
             auth: 0,
+            promotCode: codePromo,
+            promu: 0,
             biographie: "",
           });
 
@@ -69,6 +78,9 @@ exports.login = (requ, resp, next) => {
                 pays: result.pays,
                 pseudo: result.pseudo,
                 auth: result.auth,
+                avatar: result.proflimage,
+                codePromo: result.promotCode,
+                promu:result.promu,
               });
           }else{
             resp
@@ -90,7 +102,8 @@ exports.getUser = (requ, resp, next) => {
   User.findById(requ.body.userId)
     .exec()
     .then((response) => {
-      resp
+      if(response.proflimage !== '' || response.proflimage !== undefined){
+        resp
         .status(200)
         .json({
           status: true,
@@ -104,8 +117,30 @@ exports.getUser = (requ, resp, next) => {
           pays: response.pays,
           pseudo: response.pseudo,
           auth: response.auth,
-          avatar:'http://localhost:3000/user/avatars/'+response.proflimage
+          codePromo: response.promotCode,
+          promu:response.promu,
+          avatar:'http://zeko-api.herokuapp.com/user/avatars/'+response.proflimage
         });
+      }else{
+        resp
+        .status(200)
+        .json({
+          status: true,
+          nom: response.name,
+          prenom: response.lastName,
+          age: response.age,
+          biographie: response.biographie,
+          email: response.email,
+          sexe: response.sexe,
+          adresse: response.adresse,
+          pays: response.pays,
+          pseudo: response.pseudo,
+          auth: response.auth,
+          codePromo: response.promotCode,
+          promu:response.promu,
+          avatar:''
+        });
+      }
     })
     .catch((err) => {
       resp.status(500).json({ status: false, err });
@@ -174,9 +209,9 @@ exports.findPseudo = (requ,resp,next) =>{
     .then((use) => {
         if(use){
             if(use._id == requ.body.userId){
-                resp.status(200).json({ status: true, err: 'Ce pseudo vous appartient déja' });
+                resp.status(200).json({ status: false, err: 'Ce pseudo vous appartient déja' });
             }else{
-                resp.status(200).json({ status: true, err: 'Ce pseudo est déja utilisé veillez en choisir un autre' });
+                resp.status(200).json({ status: false, err: 'Ce pseudo est déja utilisé veillez en choisir un autre' });
             }
             
         }else{
@@ -396,7 +431,61 @@ exports.sendOtpCode = (requ, resp, next) => {
       resp.status(500).json({ status: false, err });
     });
 };
+exports.createPromotion = (requ,resp,next)=>{
+  User.findOne({ _id : requ.body.userId})
+  .then((response)=>{
+    if(response.promu != 1){
+      
+      User.findOne({ promotCode : requ.body.promotCode })
+      .then((result)=>{
+        if(result){
+          console.log(result)
+          if(result._id != requ.body.userId){
 
+            const newPromot = new Promotion({
+              promoteur: result._id,
+              promu:  requ.body.userId,
+            })
+            newPromot.save()
+            .then(()=>{
+              User.updateOne(
+                { _id: requ.body.userId },
+                {
+                  _id: requ.body.userId,
+                  promu : 1,
+                }
+              )
+              .then((success)=>{
+                if(success.matchedCount > 0){
+                  resp.status(200).json({status: true, success:'Code promo validé'})
+                }else{
+                  resp.status(200).json({status: false, err:'Code promo non validé'})
+                }
+              })
+              
+            })
+            .catch(()=>{
+              resp.status(500).json({ status: false, err });
+            })
+          }else{
+            resp.status(200).json({status: false, err:'Vous ne pouvez pas utiliser ce code'})
+          }
+        }else{
+          resp.status(200).json({status: false, err:'Le code promot est incorrect'})
+        }
+      })
+      .catch(()=>{
+        resp.status(500).json({ status: false, err });
+      })
+    }else{
+      resp.status(200).json({status: false, err:'Vous avez déja utilisé un code promo'})
+    }
+  })
+  .catch((err)=>{
+    resp.status(500).json({ status: false, err });
+  })
+  
+}
 // exports.deleteOtpCode = (requ, resp, next) => {
 //   User.updateOne(
 //     { _id: requ.body.userId },

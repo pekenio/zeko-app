@@ -7,9 +7,9 @@ exports.authentification = (requ,resp,next) => {
             resp.status(500).json({status:false,err : "Accès refusé"})
         }else{
             const id = decodeToken.adminId
-            Admins.findOne({_userId : id})
-            .then(sucees =>{
-                if(sucees){
+            Admins.findOne({ _id : id})
+            .then(success =>{
+                if(success){
                     next()
                 }else{
                     resp.status(200).json({status:false,err : "Accès refusé"})

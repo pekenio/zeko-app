@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptage</title>
+</head>
+<style>
+    body{
+        height: 100vh;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    #form{
+        height: fit-content;
+        width: 20%;
+        margin:100px auto;
+    }
+
+    #form input{
+        display: block;
+        box-sizing: border-box;
+        outline: none;
+        margin-top: 30px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    #form button{
+        display: block;
+        box-sizing: border-box;
+        margin-top: 30px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: blue;
+        color: white;
+        font-weight: bold;
+    }
+
+    #textCrypt{
+        height: fit-content;
+        width: 40%;
+        margin: auto;
+        box-sizing: border-box;
+        border: 1px solid silver;
+        overflow-x: hidden;
+
+    }
+</style>
+<body>
+    <div id="form">
+        <input type="text" placeholder="Message" class="text">
+        <input type="text" placeholder="Clé" class="cle">
+        <button id="crypt">CRYPTER</button>
+    </div>
+    <div id="textCrypt">
+
+    </div>
+    <script>
+        
+
+        let button = document.getElementById('crypt')
+
+        button.addEventListener('click',()=>{
+            let text = document.querySelector('.text').value
+            let cle = document.querySelector('.cle').value
+            crypt(cle,text)
+        })
+
+        function crypt(cle,text){
+           
+        }
+    </script>
+</body>
+</html>

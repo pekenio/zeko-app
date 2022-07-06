@@ -13,6 +13,8 @@ const User = mongoose.Schema({
     pseudo : {type : String , required : false},
     auth : {type : Number,required : false},
     otpcode : {type : Number,required : false},
+    promotCode:{type: String , require: true},
+    promu:{type: Number , required: true},
     biographie : {type : String , required : false}
 })
 

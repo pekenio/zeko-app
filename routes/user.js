@@ -14,6 +14,7 @@ route.put('/updateprofil/newpassword/',userAuth.authentification,userControll.up
 route.post('/settings/sendotpcode/',userAuth.authentification,userControll.updateOtpcode,userControll.sendOtpCode)
 route.post('/settings/updateprofil/findpseudo/',userAuth.authentification,userControll.findPseudo)
 route.put('/settings/updateprofil/newpseudo/',userAuth.authentification,userControll.updatePseudo)
+route.put('/settings/parrainage/',userAuth.authentification,userControll.createPromotion)
 route.put('/settings/updateAuth/',userAuth.authentification,userControll.updateAuth)
 
 module.exports = route

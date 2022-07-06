@@ -28,7 +28,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: token secret
+          description: API key
           in: header
           required: true
       responses:
@@ -74,7 +74,7 @@ paths:
         in: formData
         required: true
       - name: token
-        description: token secret
+        description: API key
         in: header
         required: true
     responses:
@@ -102,7 +102,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: token secret
+          description: API key
           in: header
           required: true
       responses:
@@ -136,7 +136,7 @@ paths:
           type: file
           required: false
         - name: token
-          description: token secret
+          description: API key
           in: header
           required: true
       responses:
@@ -172,7 +172,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: token secret
+          description: API key
           in: header
           required: true
       responses:
@@ -205,7 +205,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: token secret
+          description: API key
           in: header
           required: true
       responses:
@@ -237,7 +237,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: token secret
+          description: API key
           in: header
           required: true
       responses:
@@ -273,7 +273,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: token secret
+          description: API key
           in: header
           required: true
       responses:
@@ -302,7 +302,7 @@ paths:
           in: formData
           required: true
         - name: token
-          description: token secret
+          description: API key
           in: header
           required: true
       responses:
@@ -330,7 +330,33 @@ paths:
           enum: [0,1]
           required: true
         - name: token
-          description: token secret
+          description: API key
+          in: header
+          required: true
+      responses:
+        200:
+          description: ok
+        500:
+          description: err
+  /user/settings/parrainage:
+    put:
+      summary: Activer un code de parrainage
+      produces:
+        - application/x-www-form-urlencoded
+      consumes:
+        - application/x-www-form-urlencoded
+      description: retourne une reponse 
+      parameters:
+        - name: userId
+          description: Identifiant de l'utilisateur
+          in: formData
+          required: true
+        - name: promotCode
+          description: Code de parrainage
+          in: formData
+          required: true
+        - name: token
+          description: API key
           in: header
           required: true
       responses:
